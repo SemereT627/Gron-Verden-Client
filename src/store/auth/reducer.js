@@ -21,6 +21,8 @@ const INITIAL_STATE = {
   resetPasswordSuccess: false,
   resetPasswordError: null,
 
+  
+
   user: {},
   token: null,
   ...JSON.parse(authCookies),

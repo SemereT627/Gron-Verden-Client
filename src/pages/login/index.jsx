@@ -64,13 +64,23 @@ const LoginPage = () => {
         ? notification.error({
             message: 'Error',
             placement: 'topRight',
-            description: `${loginError.response.data}`,
+            description: `${loginError.response.data.msg}`,
           })
         : null}
 
       <div className={'login-main'}>
         <Card style={{ width: '500px' }} className="box-shadow">
-          <img src={logo} alt="Grøn Verden" />
+          <div
+            style={{
+              display: 'flex',
+              justifyContent: 'center',
+              alignItems: 'center',
+              textAlign: 'center',
+              paddingBottom: '20px',
+            }}
+          >
+            <img src={logo} alt="Grøn Verden" />
+          </div>
           <h4 style={{ textAlign: 'center' }}>Login</h4>
           {loginError && loginError.response ? (
             <Alert
@@ -120,11 +130,22 @@ const LoginPage = () => {
               </div>
             </Form.Item>
             <Form.Item>
+              <div
+                style={{
+                  display: 'flex',
+                  justifyContent: 'space-between',
+                  alignItems: 'center',
+                }}
+              >
+                <Typography.Text>
+                  Don't have account? <Link to="/register">Sign Up</Link>
+                </Typography.Text>
+                <Typography.Text>
+                  <Link onClick={() => showModal()}>Forgot Password?</Link>
+                </Typography.Text>
+              </div>
               <Typography.Text>
-                Don't have account? <Link to="/register">Sign Up</Link>
-              </Typography.Text>
-              <Typography.Text>
-                <Link onClick={() => showModal()}>Forgot Password?</Link>
+                <Link>Google</Link>
               </Typography.Text>
             </Form.Item>
           </Form>

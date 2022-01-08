@@ -22,7 +22,7 @@ const validateMessages = {
 const ForgotPassword = ({ visible, showModal, cancelModal }) => {
   const dispatch = useDispatch();
 
-  const { forgotPasswordStart, forgotPasswordSuccess, forgotPasswordError } =
+  const { forgotPasswordLoading, forgotPasswordSuccess, forgotPasswordError } =
     useSelector((state) => state.auth);
 
   const handleSubmit = (values) => {
@@ -30,10 +30,13 @@ const ForgotPassword = ({ visible, showModal, cancelModal }) => {
     dispatch(forgotPasswordAsync(email));
   };
 
+  const cancelModalSubmit = () => cancelModal();
+
   useEffect(() => {
     if (forgotPasswordSuccess) {
       message.success('Password Reset Link is Sent. Please Check your Email');
       dispatch(clearForgotPasswordSuccess());
+      cancelModalSubmit();
     }
   }, [forgotPasswordSuccess]);
 
@@ -54,7 +57,7 @@ const ForgotPassword = ({ visible, showModal, cancelModal }) => {
         : null}
 
       <Modal
-        title="Reset Password"
+        title="Forgot Password"
         visible={visible}
         onOk={handleSubmit}
         onCancel={cancelModal}
@@ -66,10 +69,10 @@ const ForgotPassword = ({ visible, showModal, cancelModal }) => {
             form="resetPasswordForm"
             key="submit"
             htmlType="submit"
-            // disabled={createDriverLoading}
-            // loading={createDriverLoading}
+            disabled={forgotPasswordLoading}
+            loading={forgotPasswordLoading}
           >
-            Submit
+            Send
           </Button>,
         ]}
       >

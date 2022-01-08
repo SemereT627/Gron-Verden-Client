@@ -11,6 +11,7 @@ import {
   Upload,
   message,
   DatePicker,
+  notification,
 } from 'antd';
 import {
   LoadingOutlined,
@@ -22,7 +23,9 @@ import {
 import { useDispatch, useSelector } from 'react-redux';
 import { Link, Redirect, useHistory } from 'react-router-dom';
 
-import { signUpAsync } from '../../store/auth/action';
+import { clearSignUpSuccess, signUpAsync } from '../../store/auth/action';
+
+import logo from '../../assets/images/logo.png';
 
 import './style.css';
 
@@ -92,22 +95,13 @@ const RegisterPage = () => {
 
   const dispatch = useDispatch();
   const history = useHistory();
-  const { signUpLoading, signUpError, token } = useSelector(
+  const { signUpLoading, signUpSuccess, signUpError, token } = useSelector(
     (state) => state.auth
   );
 
-  // useEffect(() => {
-  //   if (token === 'gotu') {
-  //     history.push('/login');
-  //   } else if (token) {
-  //     history.push('/');
-  //   }
-  // }, [token]);
-
   const handleSubmit = (values) => {
     const {
-      firstName,
-      lastName,
+      fullName,
       email,
       password,
       userName,
@@ -121,10 +115,19 @@ const RegisterPage = () => {
     } else if (!isJpgOrPng(form.file)) {
       message.error('Profile picture can only be JPG or PNG file');
     } else {
-      console.log(form.file);
       const formData = new FormData();
-      formData.append('firstName', firstName);
-      formData.append('lastName', lastName);
+      console.log(
+        fullName.split(' ')[1],
+        email,
+        password,
+        userName,
+        phoneNumber,
+        gender,
+        dateOfBirth,
+        city
+      );
+      formData.append('firstName', fullName.split(' ')[0]);
+      formData.append('lastName', fullName.split(' ')[1]);
       formData.append('email', email);
       formData.append('password', password);
       formData.append('userName', userName);
@@ -136,154 +139,181 @@ const RegisterPage = () => {
       formData.append('userRole', 'user');
 
       dispatch(signUpAsync(formData));
-
-      if (signUpLoading) {
-        <Redirect to="/login" />;
-      }
     }
   };
-  const onReset = () => {
-    registrationForm.resetFields();
-  };
+
+  useEffect(() => {
+    if (signUpError) {
+      dispatch(clearSignUpSuccess());
+    }
+  }, [signUpError]);
+
+  useEffect(() => {
+    if (signUpSuccess) {
+      message.success('Registered Successfully');
+      history.push('/login');
+    }
+  }, [signUpSuccess]);
 
   return (
-    <div
-      style={{
-        // backgroundImage: "url('/login-background.jpg')",
-        backgroundSize: '100% 100%',
-        height: '100vh',
-        // overflowY: 'hidden',
-        display: 'flex',
-        justifyContent: 'flex-end',
-        paddingRight: '300px',
-        alignItems: 'center',
-      }}
-    >
-      <Card
-        style={{ width: '500px', height: '100vh', position: 'relative' }}
-        className="box-shadow"
-      >
-        <h4 style={{ textAlign: 'center' }}>Sign Up</h4>
-        {signUpError && signUpError.response ? (
-          <Alert
-            message={signUpError.response.data.message}
-            type="error"
-            closable
-            style={{
-              marginTop: 5,
-              marginBottom: 5,
-            }}
-          />
-        ) : null}
-        <Form
-          {...layout}
-          form={registrationForm}
-          name="control-hooks"
-          onFinish={handleSubmit}
+    <>
+      {signUpError && signUpError.message
+        ? notification.error({
+            message: 'Error',
+            placement: 'topRight',
+            description: signUpError.response.data.msg,
+          })
+        : null}
+
+      <div className="register-form">
+        <Card
+          style={{ height: '100%', position: 'relative' }}
+          className="box-shadow"
         >
-          <img
-            src="images/logo.png"
-            alt="Grøn Verden"
-            className="img-fluid float-right"
-          />
-          <Form.Item name="profile" label="Profile Picture">
-            <Upload
-              listType="picture-card"
-              fileList={form.fileList}
-              onPreview={handlePreview}
-              onChange={handleChange}
-              beforeUpload={beforeUpload}
+          <Form
+            {...layout}
+            form={registrationForm}
+            name="control-hooks"
+            onFinish={handleSubmit}
+            className="form-scroll"
+          >
+            <div
+              style={{
+                display: 'flex',
+                justifyContent: 'center',
+                alignItems: 'center',
+                textAlign: 'center',
+                paddingBottom: '20px',
+              }}
             >
-              {form.fileList.length === 1 ? null : uploadButton}
-            </Upload>
-          </Form.Item>
+              <img src={logo} alt="Grøn Verden" />
+            </div>
+            <h4 style={{ textAlign: 'center' }}>Register</h4>
+            <div className="basic-form">
+              <div>
+                <Form.Item name="profile" label="Profile Picture">
+                  <Upload
+                    listType="picture-card"
+                    fileList={form.fileList}
+                    onPreview={handlePreview}
+                    onChange={handleChange}
+                    beforeUpload={beforeUpload}
+                  >
+                    {form.fileList.length === 1 ? null : uploadButton}
+                  </Upload>
+                </Form.Item>
 
-          <Form.Item
-            name="firstName"
-            label="First Name"
-            rules={[{ required: true }]}
-          >
-            <Input placeholder="First name" />
-          </Form.Item>
-          <Form.Item
-            name="lastName"
-            label="Last Name"
-            rules={[{ required: true }]}
-          >
-            <Input placeholder="Last name" />
-          </Form.Item>
-          <Form.Item
-            name="userName"
-            label="Username"
-            rules={[{ required: true }]}
-          >
-            <Input
-              placeholder="Enter your username"
-              prefix={<UserOutlined className="site-form-item-icon" />}
-            />
-          </Form.Item>
+                <Form.Item
+                  name="fullName"
+                  label="Full Name"
+                  rules={[{ required: true, message: 'Full name is required' }]}
+                >
+                  <Input placeholder="Full name" />
+                </Form.Item>
+                <Form.Item
+                  name="userName"
+                  label="Username"
+                  rules={[{ required: true, message: 'User name is required' }]}
+                >
+                  <Input
+                    placeholder="Enter your username"
+                    prefix={<UserOutlined className="site-form-item-icon" />}
+                  />
+                </Form.Item>
 
-          <Form.Item name="gender" label="Gender">
-            <Select placeholder="Gender" allowClear>
-              <Option value="Male">Male</Option>
-              <Option value="Female">Female</Option>
-            </Select>
-          </Form.Item>
-          <Form.Item
-            name="dateOfBirth"
-            label="Date Of Birth"
-            rules={[{ required: true }]}
-          >
-            <DatePicker placeholder="Select birth date" className="w-100" />
-          </Form.Item>
-          <Form.Item name="email" label="Email" rules={[{ required: true }]}>
-            <Input placeholder="Email" />
-          </Form.Item>
-          <Form.Item
-            name="password"
-            label="Password"
-            rules={[{ required: true }]}
-          >
-            <Input placeholder="Password" />
-          </Form.Item>
-          <Form.Item
-            name="phoneNumber"
-            label="Phone Number"
-            rules={[{ required: true }]}
-          >
-            <Input placeholder="Phone number" />
-          </Form.Item>
-          <Form.Item name="city" label="City" rules={[{ required: true }]}>
-            <Input placeholder="City" />
-          </Form.Item>
-          <Form.Item {...tailLayout}>
-            <Button type="primary" htmlType="submit">
-              Submit
-            </Button>
-            <Button htmlType="button" onClick={onReset}>
-              Reset
-            </Button>
-          </Form.Item>
-          <Form.Item>
-            <Typography.Text>
-              Already have account? <Link to="/login">Log in</Link>
-            </Typography.Text>
-          </Form.Item>
-        </Form>
-        <Modal
-          visible={preview.previewVisible}
-          title={preview.previewTitle}
-          footer={null}
-          onCancel={() => setPreview({ previewVisible: false })}
-        >
-          <img
-            alt="example"
-            style={{ width: '100%' }}
-            src={preview.previewImage}
-          />
-        </Modal>
-      </Card>
-    </div>
+                <Form.Item name="gender" label="Gender">
+                  <Select placeholder="Gender" allowClear>
+                    <Option value="Male">Male</Option>
+                    <Option value="Female">Female</Option>
+                  </Select>
+                </Form.Item>
+                <Form.Item
+                  name="dateOfBirth"
+                  label="Date Of Birth"
+                  rules={[
+                    { required: true, message: 'Date of Birth is required' },
+                  ]}
+                >
+                  <DatePicker
+                    placeholder="Select birth date"
+                    className="w-100"
+                  />
+                </Form.Item>
+              </div>
+
+              <div>
+                <Form.Item
+                  name="email"
+                  label="Email"
+                  rules={[{ required: true, message: 'Email is required' }]}
+                >
+                  <Input placeholder="Email" />
+                </Form.Item>
+                <Form.Item
+                  name="password"
+                  label="Password"
+                  rules={[{ required: true, message: 'Password is required' }]}
+                >
+                  <Input.Password placeholder="Password" />
+                </Form.Item>
+                <Form.Item
+                  name="phoneNumber"
+                  label="Phone Number"
+                  rules={[
+                    { required: true, message: 'Phone number is required' },
+                  ]}
+                >
+                  <Input placeholder="Phone number" />
+                </Form.Item>
+                <Form.Item
+                  name="city"
+                  label="City"
+                  rules={[{ required: true, message: 'City is required' }]}
+                >
+                  <Input placeholder="City" />
+                </Form.Item>
+                <Form.Item {...tailLayout}>
+                  <Button
+                    type="primary"
+                    htmlType="submit"
+                    style={{
+                      width: '100%',
+                    }}
+                    loading={signUpLoading}
+                    disabled={signUpLoading}
+                  >
+                    Submit
+                  </Button>
+                </Form.Item>
+                <Form.Item
+                  style={{
+                    display: 'flex',
+                    textAlign: 'right',
+                    justifyContent: 'flex-end',
+                  }}
+                >
+                  <Typography.Text>
+                    Already have account? <Link to="/login">Log in</Link>
+                  </Typography.Text>
+                </Form.Item>
+              </div>
+            </div>
+          </Form>
+        </Card>
+      </div>
+      <Modal
+        visible={preview.previewVisible}
+        title={preview.previewTitle}
+        footer={null}
+        onCancel={() => setPreview({ previewVisible: false })}
+      >
+        <img
+          alt="example"
+          style={{ width: '100%' }}
+          src={preview.previewImage}
+        />
+      </Modal>
+    </>
   );
 };
 
