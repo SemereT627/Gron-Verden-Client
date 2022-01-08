@@ -1,0 +1,31 @@
+.login-main {
+  background-image: url('../../assets/images/login-background.jpg');
+  background-size: 100% 100%;
+  display: flex;
+  justify-content: flex-end;
+  padding-right: 10%;
+  align-items: center;
+  height: 100vh;
+}
+
+.login-logo {
+  display: 'flex';
+  align-items: 'center';
+  justify-content: 'center';
+  padding-top: '10px';
+}
+
+.login-logo-up {
+  display: flex;
+  flex-direction: column;
+}
+
+.login-logo-up p {
+  margin: 0;
+  padding: 0;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+}

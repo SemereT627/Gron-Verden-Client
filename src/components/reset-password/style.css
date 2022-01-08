@@ -1,0 +1,10 @@
+.reset-password {
+  background: url('../../assets/images/plant-potted.jpg') no-repeat center;
+  background-size: 100% 100%;
+  display: flex;
+  width: 100vw;
+  height: 100vh;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+}
