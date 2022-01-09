@@ -1,7 +1,13 @@
 import React from 'react';
 import { useRouteMatch } from 'react-router-dom';
 import { Switch, Route } from 'react-router-dom';
+
 import './App.css';
+
+/**
+ * Pages
+ */
+import EventPage from './pages/event';
 import HomePage from './pages/home';
 import IdentifyPlant from './pages/identify-plant';
 
@@ -15,6 +21,9 @@ const App = () => {
         </Route>
         <Route path={`${path}identify`}>
           <IdentifyPlant />
+        </Route>
+        <Route path={`${path}events`}>
+          <EventPage />
         </Route>
       </Switch>
     </>

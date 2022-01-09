@@ -79,8 +79,8 @@ const Header = () => {
                     </li>
 
                     <li className="nav-item">
-                      <Link className="d-block" to="/cart">
-                        Cart
+                      <Link className="d-block" to="/carts">
+                        Carts
                       </Link>
                     </li>
                     <li className="nav-item">
@@ -89,8 +89,8 @@ const Header = () => {
                       </Link>
                     </li>
                     <li className="nav-item">
-                      <Link className="d-block" to="/event">
-                        Event
+                      <Link className="d-block" to="/events">
+                        Events
                       </Link>
                     </li>
                   </ul>
