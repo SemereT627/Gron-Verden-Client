@@ -1,0 +1,19 @@
+.identify-form {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+}
+
+.identify-btn {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.identify-form > div {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+}

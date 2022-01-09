@@ -124,7 +124,12 @@ const ResetPassword = () => {
                 sm: { span: 16, offset: 8 },
               }}
             >
-              <Button type="primary" htmlType="submit">
+              <Button
+                type="primary"
+                htmlType="submit"
+                loading={resetPasswordLoading}
+                disabled={resetPasswordLoading}
+              >
                 Update Password
               </Button>
             </Form.Item>
