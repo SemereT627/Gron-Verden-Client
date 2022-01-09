@@ -6,6 +6,7 @@ const INITIAL_STATE = {
   identifyPlantError: null,
 
   plants: [],
+  className: '',
 };
 
 const reducer = (state = INITIAL_STATE, action) => {
@@ -25,6 +26,7 @@ const reducer = (state = INITIAL_STATE, action) => {
         identifyPlantSuccess: true,
         identifyPlantError: null,
         plants: action.payload.plants,
+        className: action.payload.className,
       };
 
     case IdentifyPlantActionTypes.IDENTIFY_PLANT_ERROR:
@@ -42,5 +44,10 @@ const reducer = (state = INITIAL_STATE, action) => {
         identifyPlantSuccess: false,
         identifyPlantError: null,
       };
+
+    default:
+      return state;
   }
 };
+
+export default reducer;

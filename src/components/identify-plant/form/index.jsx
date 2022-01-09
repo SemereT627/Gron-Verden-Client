@@ -1,4 +1,5 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
 
 import {
   Form,
@@ -17,6 +18,11 @@ import {
 import { PlusOutlined } from '@ant-design/icons';
 
 import './style.css';
+import {
+  clearIdentifyPlantSuccess,
+  identifyPlantAsync,
+} from '../../../store/identify-plant/action';
+import IdentifyPlantCard from '../card';
 
 const layout = {
   labelCol: { span: 9 },
@@ -27,6 +33,15 @@ const tailLayout = {
 };
 
 const IdentifyPlantForm = () => {
+  const dispatch = useDispatch();
+  const {
+    identifyPlantLoading,
+    identifyPlantSuccess,
+    identifyPlantError,
+    plants,
+    className: plantclassName,
+  } = useSelector((state) => state.identifyPlant);
+
   const [form, setForm] = useState({
     file: null,
     fileList: [],
@@ -85,8 +100,26 @@ const IdentifyPlantForm = () => {
     setForm({ ...form, file, fileList });
 
   const handleSubmit = (values) => {
-    console.log(values);
+    const { identifyPlant } = values;
+    console.log(identifyPlant);
+    const formData = new FormData();
+    formData.append('file', form.file);
+    console.log(form.file);
+    dispatch(identifyPlantAsync(formData));
   };
+
+  useEffect(() => {
+    if (identifyPlantSuccess) {
+      message.success('Plant fetched successfully');
+      dispatch(clearIdentifyPlantSuccess());
+    }
+  }, [identifyPlantSuccess]);
+
+  useEffect(() => {
+    if (identifyPlantError) {
+      dispatch(clearIdentifyPlantSuccess());
+    }
+  }, [identifyPlantError]);
 
   return (
     <>
@@ -112,7 +145,12 @@ const IdentifyPlantForm = () => {
           </div>
           <div className="identify-btn">
             <Form.Item {...tailLayout}>
-              <Button type="primary" htmlType="submit">
+              <Button
+                type="primary"
+                htmlType="submit"
+                loading={identifyPlantLoading}
+                disabled={identifyPlantLoading}
+              >
                 Submit
               </Button>
             </Form.Item>
@@ -132,25 +170,40 @@ const IdentifyPlantForm = () => {
         </Modal>
 
         <div className="container mt-2">
+          <h1>Result</h1>
+          <h3> Classname</h3>
+          {plantclassName && (
+            <h4
+              style={{
+                marginLeft: '10px',
+              }}
+            >
+              {plantclassName}
+            </h4>
+          )}
+          <h1>Photos ({plants.length})</h1>
           <Row>
-            {/* {plantVariableGlobal &&
-              plantVariableGlobal.suggestions.map((p) => {
+            {/* Response Here */}
+            {console.log(plants)}
+            {plants &&
+              plants.map((plant) => {
                 return (
                   <>
                     <Col className="mb-2" span={8}>
-                      <IdentifyPlantCard
-                        image={p.similar_images[0].url}
+                      {console.log(plant)}
+                      {/* <IdentifyPlantCard
+                        image={.similar_images[0].url}
                         scientificName={p.plant_name}
                         url={p.plant_details.url}
                         wikiDescription={p.plant_details.wiki_description.value}
                         similarProbability={
                           p.similar_images[0].similarity.toFixed(2) * 100
                         }
-                      />
+                      /> */}
                     </Col>
                   </>
                 );
-              })} */}
+              })}
           </Row>
         </div>
       </div>

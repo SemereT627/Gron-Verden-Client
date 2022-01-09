@@ -8,9 +8,10 @@ export const identifyPlantStart = () => ({
   type: IdentifyPlantActionTypes.IDENTIFY_PLANT_START,
 });
 
-export const identifyPlantSuccess = (plants) => ({
+export const identifyPlantSuccess = (className, plants) => ({
   type: IdentifyPlantActionTypes.IDENTIFY_PLANT_SUCCESS,
   payload: {
+    className: className,
     plants,
   },
 });
@@ -29,13 +30,21 @@ export const identifyPlantAsync = (formData) => {
   return async (dispatch, getState) => {
     try {
       dispatch(identifyPlantStart());
+      console.log(formData);
       const response = await axios.post(
-        `${process.env.REACT_APP_API_URL}/auth/register`,
-        formData
+        `http://61f6-196-188-125-190.ngrok.io/predict`,
+        formData,
+        {
+          headers: {
+            'Content-Type': 'multipart/form-data',
+          },
+        }
       );
 
       console.log(response);
-      //   dispatch(identifyPlantSuccess(response))
+      dispatch(
+        identifyPlantSuccess(response.data.class_name, response.data.plant_info)
+      );
     } catch (err) {
       dispatch(identifyPlantError(err));
     }

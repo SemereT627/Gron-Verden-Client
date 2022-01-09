@@ -8,13 +8,13 @@ import {
 
 import './style.css';
 
-function IdentifyPlantCard({
+const IdentifyPlantCard = ({
   image,
   scientificName,
   url,
   wikiDescription,
   similarProbability,
-}) {
+}) => {
   return (
     <>
       <Card
@@ -38,7 +38,8 @@ function IdentifyPlantCard({
         </div>
       </Card>
     </>
+    
   );
-}
+};
 
 export default IdentifyPlantCard;
