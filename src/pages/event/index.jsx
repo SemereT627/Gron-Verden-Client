@@ -23,7 +23,7 @@ const EventPage = () => {
   return (
     <>
       <ShopHeader />
-      <ShopBanner />
+      <ShopBanner bannerTitle={'Events'} subTitle={'Events'} userName={'All'} />
       <Row>
         <Col>
           <Button type="primary" onClick={showModal}>

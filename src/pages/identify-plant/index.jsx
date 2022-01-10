@@ -7,7 +7,11 @@ const IdentifyPlant = () => {
   return (
     <>
       <ShopHeader />
-      <ShopBanner />
+      <ShopBanner
+        bannerTitle={'Identify Plant'}
+        subTitle={'Identify'}
+        userName={'Plant'}
+      />
       <IdentifyPlantForm />
     </>
   );

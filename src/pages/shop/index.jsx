@@ -10,7 +10,7 @@ const ShopPage = () => {
   return (
     <>
       <ShopHeader />
-      <ShopBanner />
+      <ShopBanner bannerTitle={'Shops'} subTitle={'Shops'} userName={'All'} />
       <ShopStat />
       <ShopMain />
       <Footer />

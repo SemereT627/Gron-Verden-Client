@@ -19,7 +19,11 @@ const MyShopPage = () => {
   return (
     <>
       <ShopHeader />
-      <ShopBanner />
+      <ShopBanner
+        bannerTitle={'My Shop'}
+        subTitle={'Shops'}
+        userName={'My Shop'}
+      />
 
       <Button type="primary" onClick={showModal}>
         Create Shop
@@ -30,7 +34,6 @@ const MyShopPage = () => {
       {/* Need to be in condition */}
       <MyShop />
 
-      
       <Footer />
     </>
   );

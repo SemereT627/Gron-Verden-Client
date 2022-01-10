@@ -49,8 +49,8 @@ const ShopHeader = (props) => {
                     </li>
 
                     <li className="nav-item">
-                      <Link className="d-block" to="/carts">
-                        Carts
+                      <Link className="d-block" to="/cart">
+                        Cart
                       </Link>
                     </li>
 

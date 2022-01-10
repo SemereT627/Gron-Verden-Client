@@ -3,6 +3,7 @@ import { useRouteMatch } from 'react-router-dom';
 import { Switch, Route } from 'react-router-dom';
 
 import './App.css';
+import CartPage from './pages/cart';
 
 /**
  * Pages
@@ -32,6 +33,9 @@ const App = () => {
         </Route>
         <Route path={`${path}my-shop`}>
           <MyShopPage />
+        </Route>
+        <Route path={`${path}cart`}>
+          <CartPage />
         </Route>
       </Switch>
     </>
