@@ -19,7 +19,7 @@ const IdentifyPlantCard = ({
     <>
       <Card
         style={{ width: 400 }}
-        cover={<img alt="example" src={image} />}
+        cover={<img alt="predict" src={image} />}
         className="box-shadow"
       >
         <h2 className="playfair float-left mr-5">{scientificName}</h2>
@@ -38,7 +38,6 @@ const IdentifyPlantCard = ({
         </div>
       </Card>
     </>
-    
   );
 };
 

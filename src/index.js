@@ -26,9 +26,9 @@ ReactDOM.render(
         <Route path={'/passwordReset/:user_id/:token_id'}>
           <ResetPassword />
         </Route>
-        <ShieldRoute path={'/'}>
+        <Route path={'/'}>
           <App />
-        </ShieldRoute>
+        </Route>
       </Switch>
     </BrowserRouter>
   </Provider>,

@@ -95,18 +95,13 @@ const Footer = () => {
               </h3>
               <ul className="list-unstyled footerNavList">
                 <li className="mb-1">
-                  <Link to="/shop-admin" style={{ color: '#aaaaaa' }}>
+                  <Link to="/my-shop" style={{ color: '#aaaaaa' }}>
                     New Plants
                   </Link>
                 </li>
                 <li className="mb-2">
                   <Link to="/shops" style={{ color: '#aaaaaa' }}>
                     Shops
-                  </Link>
-                </li>
-                <li className="mb-2">
-                  <Link to="/learn" style={{ color: '#aaaaaa' }}>
-                    Learn
                   </Link>
                 </li>
                 <li>
@@ -131,7 +126,7 @@ const Footer = () => {
                 </li>
 
                 <li className="mb-2">
-                  <Link to="/shop-admin" style={{ color: '#aaaaaa' }}>
+                  <Link to="/my-shop" style={{ color: '#aaaaaa' }}>
                     My shop
                   </Link>
                 </li>
@@ -144,53 +139,50 @@ const Footer = () => {
               >
                 Popular Tag
               </h3>
-              <ul className="list-unstyled tagNavList d-flex flex-wrap justify-content-lg-end mb-0">
-                <li className="text-center mb-2 mr-2">
-                  <a
-                    href="javascript:void(0);"
-                    className="md-round d-block py-2 px-2"
-                    style={{ color: '#aaaaaa' }}
-                  >
-                    Indoor plant
-                  </a>
-                </li>
-                <li className="text-center mb-2">
-                  <a
-                    href="javascript:void(0);"
-                    className="md-round d-block py-2 px-2"
-                    style={{ color: '#aaaaaa' }}
-                  >
-                    Office plant
-                  </a>
-                </li>
-                <li className="text-center mb-2 mr-2">
-                  <a
-                    href="javascript:void(0);"
-                    className="md-round d-block py-2 px-2"
-                    style={{ color: '#aaaaaa' }}
-                  >
-                    Cactus plant
-                  </a>
-                </li>
-                <li className="text-center mb-2">
-                  <a
-                    href="javascript:void(0);"
-                    className="md-round d-block py-2 px-2"
-                    style={{ color: '#aaaaaa' }}
-                  >
-                    Table tree plant
-                  </a>
-                </li>
-                <li className="text-center mb-2">
-                  <a
-                    href="javascript:void(0);"
-                    className="md-round d-block py-2 px-2"
-                    style={{ color: '#aaaaaa' }}
-                  >
-                    House plant
-                  </a>
-                </li>
-              </ul>
+              <div>
+                <ul className="list-unstyled tagNavList d-flex flex-column justify-content-lg-end mb-0">
+                  <li className="text-center mb-2 px-8">
+                    <a
+                      href="javascript:void(0);"
+                      className="md-round d-block py-2 px-2"
+                    >
+                      Indoor plant
+                    </a>
+                  </li>
+                  <li className="text-center mb-2 px-8">
+                    <a
+                      href="javascript:void(0);"
+                      className="md-round d-block py-2 px-2"
+                    >
+                      Office plant
+                    </a>
+                  </li>
+                  <li className="text-center mb-2 px-8">
+                    <a
+                      href="javascript:void(0);"
+                      className="md-round d-block py-2 px-2"
+                    >
+                      Cactus plant
+                    </a>
+                  </li>
+                  <li className="text-center mb-2 px-8">
+                    <a
+                      href="javascript:void(0);"
+                      className="md-round d-block py-2 px-2"
+                    >
+                      Table tree plant
+                    </a>
+                  </li>
+                  <li className="text-center mb-2 px-8">
+                    <a
+                      href="javascript:void(0);"
+                      className="md-round d-block py-2 px-2"
+                    >
+                      House plant
+                    </a>
+                  </li>
+                </ul>
+              </div>
             </div>
           </div>
         </aside>

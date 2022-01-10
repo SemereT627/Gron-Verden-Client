@@ -9,7 +9,7 @@ const ShopStat = () => {
             <ul className="progressCounter list-unstyled mb-2 d-flex flex-wrap text-capitalize text-center">
               <li className="mb-md-0 mb-3">
                 <strong className="d-block fwEbold counter mb-2">
-                  {totalPlants}
+                  {/* {totalPlants} */}0
                 </strong>
                 <strong className="d-block text-uppercase txtWrap">
                   Total Plants
@@ -17,9 +17,10 @@ const ShopStat = () => {
               </li>
               <li className="mb-md-0 mb-3">
                 <strong className="d-block fwEbold counter mb-2">
-                  {totalPlants === 0
+                  {/* {totalPlants === 0
                     ? 0
-                    : `${Math.random().toFixed(1) * 10 + 10}`}
+                    : `${Math.random().toFixed(1) * 10 + 10}`} */}
+                  0
                 </strong>
                 <strong className="d-block text-uppercase txtWrap">
                   Total sell
@@ -27,9 +28,10 @@ const ShopStat = () => {
               </li>
               <li className="mb-md-0 mb-3">
                 <strong className="d-block fwEbold counter mb-2">
-                  {totalPlants === 0
+                  {/* {totalPlants === 0
                     ? 0
-                    : `${Math.random().toFixed(1) * 10 + 10}`}
+                    : `${Math.random().toFixed(1) * 10 + 10}`} */}
+                  0
                 </strong>
                 <strong className="d-block text-uppercase txtWrap">
                   Happy Customers
@@ -37,9 +39,10 @@ const ShopStat = () => {
               </li>
               <li className="mb-md-0 mb-3">
                 <strong className="d-block fwEbold counter mb-2">
-                  {totalPlants === 0
+                  {/* {totalPlants === 0
                     ? 0
-                    : `${Math.random().toFixed(1) * 10 + 10}`}
+                    : `${Math.random().toFixed(1) * 10 + 10}`} */}
+                  0
                 </strong>
                 <strong className="d-block text-uppercase txtWrap">
                   Milestone

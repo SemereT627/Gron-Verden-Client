@@ -30,9 +30,8 @@ export const identifyPlantAsync = (formData) => {
   return async (dispatch, getState) => {
     try {
       dispatch(identifyPlantStart());
-      console.log(formData);
       const response = await axios.post(
-        `http://61f6-196-188-125-190.ngrok.io/predict`,
+        `https://f953-196-188-49-157.ngrok.io/predict`,
         formData,
         {
           headers: {
@@ -41,7 +40,7 @@ export const identifyPlantAsync = (formData) => {
         }
       );
 
-      console.log(response);
+      console.log(response)
       dispatch(
         identifyPlantSuccess(response.data.class_name, response.data.plant_info)
       );

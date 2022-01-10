@@ -10,6 +10,8 @@ import './App.css';
 import EventPage from './pages/event';
 import HomePage from './pages/home';
 import IdentifyPlant from './pages/identify-plant';
+import MyShopPage from './pages/my-shop';
+import ShopPage from './pages/shop';
 
 const App = () => {
   let { path, url } = useRouteMatch();
@@ -24,6 +26,12 @@ const App = () => {
         </Route>
         <Route path={`${path}events`}>
           <EventPage />
+        </Route>
+        <Route path={`${path}shops`}>
+          <ShopPage />
+        </Route>
+        <Route path={`${path}my-shop`}>
+          <MyShopPage />
         </Route>
       </Switch>
     </>

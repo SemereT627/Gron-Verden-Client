@@ -1,10 +1,21 @@
-import React from 'react';
-
+import React, { useState, useEffect } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
 import { Link } from 'react-router-dom';
+
+import { logOut } from '../../store/auth/action';
+
+import { Dropdown, Menu, Space, Typography, Avatar } from 'antd';
 
 import logo from '../../assets/images/logo.png';
 
 const Header = () => {
+  const dispatch = useDispatch();
+  const { user } = useSelector((state) => state.auth);
+
+  const handleLogout = () => {
+    dispatch(logOut());
+  };
+
   return (
     <>
       <header
@@ -59,7 +70,7 @@ const Header = () => {
                       </Link>
                     </li>
                     <li className="nav-item">
-                      <Link className="d-block" to="/shop-admin">
+                      <Link className="d-block" to="/my-shop">
                         My shop
                       </Link>
                     </li>
@@ -108,34 +119,30 @@ const Header = () => {
             </div>
           </div>
           <div className="col-6 col-sm-3 col-lg-2 order-sm-3 order-md-0 dis-none">
-            {/* <ul className="nav nav-tabs wishList pt-xl-5 pt-lg-4 pt-3 mr-xl-3 mr-0 justify-content-end border-bottom-0">
+            <ul className="nav nav-tabs wishList pt-xl-5 pt-lg-4 pt-3 mr-xl-3 mr-0 justify-content-end border-bottom-0">
               <li>
-                {!user ? (
-                  <>
-                    <Link className="pr-5" to="/login">
-                      Login
-                    </Link>
-                    <Link className="" to="/register">
-                      Register
-                    </Link>
-                  </>
-                ) : (
-                  <>
-                    <div className="d-flex">
-                      <span className="mt-1 border" style={{ width: 180 }}>
-                        Hi, {user.firstName}
-                      </span>
-                      <button
-                        className="dropdown-item text-danger"
-                        onClick={onLogOut}
-                      >
-                        Logout
-                      </button>
-                    </div>
-                  </>
-                )}
+                <>
+                  <div className="d-flex">
+                    <Dropdown
+                      overlay={
+                        <Menu>
+                          <Menu.Item onClick={handleLogout}>Logout</Menu.Item>
+                        </Menu>
+                      }
+                    >
+                      <div style={{ display: 'flex', flexDirection: 'row' }}>
+                        <Space direction="horizontal" size="middle">
+                          <Typography.Text>
+                            Hi, {user.firstName}
+                          </Typography.Text>
+                          <Avatar size="default">{user.firstName[0]}</Avatar>
+                        </Space>
+                      </div>
+                    </Dropdown>
+                  </div>
+                </>
               </li>
-            </ul> */}
+            </ul>
           </div>
         </div>
       </header>

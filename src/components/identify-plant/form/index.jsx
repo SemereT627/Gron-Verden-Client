@@ -13,6 +13,7 @@ import {
   Space,
   message,
   DatePicker,
+  Tag,
 } from 'antd';
 
 import { PlusOutlined } from '@ant-design/icons';
@@ -170,37 +171,47 @@ const IdentifyPlantForm = () => {
         </Modal>
 
         <div className="container mt-2">
-          <h1>Result</h1>
-          <h3> Classname</h3>
+          {plantclassName !== '' ? (
+            <>
+              <h1>Result</h1>
+            </>
+          ) : null}
+
           {plantclassName && (
-            <h4
-              style={{
-                marginLeft: '10px',
-              }}
-            >
-              {plantclassName}
+            <h4>
+              Classname <Tag color="green">{plantclassName}</Tag>
             </h4>
           )}
-          <h1>Photos ({plants.length})</h1>
+
+          <div
+            style={{
+              marginTop: '10px',
+            }}
+          >
+            {plantclassName !== '' ? (
+              <h4>
+                Photos <Tag color={'#87d068'}>{plants.length}</Tag>
+              </h4>
+            ) : null}
+          </div>
           <Row>
             {/* Response Here */}
-            {console.log(plants)}
             {plants &&
-              plants.map((plant) => {
+              plants.map((plant, index) => {
                 return (
                   <>
-                    <Col className="mb-2" span={8}>
-                      {console.log(plant)}
-                      {/* <IdentifyPlantCard
-                        image={.similar_images[0].url}
-                        scientificName={p.plant_name}
-                        url={p.plant_details.url}
-                        wikiDescription={p.plant_details.wiki_description.value}
-                        similarProbability={
-                          p.similar_images[0].similarity.toFixed(2) * 100
-                        }
-                      /> */}
-                    </Col>
+                    {plant.probability * 100 > 30 ? (
+                      <Col className="mb-2" span={8}>
+                        <IdentifyPlantCard
+                          key={index}
+                          image={plant.similar_images[1]}
+                          scientificName={plant.plant_name}
+                          url={plant.url}
+                          wikiDescription={plant.url}
+                          similarProbability={plant.probability * 100}
+                        />
+                      </Col>
+                    ) : null}
                   </>
                 );
               })}
