@@ -116,7 +116,7 @@ const CreateEvent = ({ visible, onCancel, onSubmit }) => {
     newEvent.append('eventTotalParticipants', eventTotalParticipants);
     newEvent.append('eventLogo', form.file);
 
-    console.log(values);
+    
     dispatch(createEventAsync(newEvent));
   };
 

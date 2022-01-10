@@ -40,6 +40,7 @@ const LoginPage = () => {
   useEffect(() => {
     console.log(token);
     if (token) {
+      message.success('Logged in successfully');
       history.push('/');
     }
   }, [token]);
