@@ -43,9 +43,6 @@ const EventReducer = (state = INITIAL_STATE, action) => {
         ...state,
         fetchEventsLoading: false,
         events: action.payload.events,
-        page: action.payload.page,
-        limit: action.payload.limit,
-        total: action.payload.total,
         fetchEventsError: null,
       };
 

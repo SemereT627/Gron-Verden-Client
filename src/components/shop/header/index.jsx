@@ -1,9 +1,20 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
 import { Link } from 'react-router-dom';
+
+import { Dropdown, Menu, Space, Typography, Avatar } from 'antd';
 
 import logo from '../../../assets/images/logo.png';
 
+import { logOut } from '../../../store/auth/action';
+
 const ShopHeader = (props) => {
+  const dispatch = useDispatch();
+  const { user } = useSelector((state) => state.auth);
+  const handleLogout = () => {
+    dispatch(logOut());
+  };
+
   return (
     <header id="header" className="position-relative">
       <div className="headerHolder container pt-lg-5 pb-lg-7 py-4">
@@ -15,7 +26,7 @@ const ShopHeader = (props) => {
               </Link>
             </div>
           </div>
-          <div className="col-6 col-sm-7 col-lg-8 static-block">
+          <div className="col-6 col-sm-7 col-lg-7 static-block">
             <div className="mainHolder pt-lg-5 pt-3 justify-content-center">
               <nav className="navbar navbar-expand-lg navbar-light p-0 pageNav2 position-static">
                 <button
@@ -69,10 +80,29 @@ const ShopHeader = (props) => {
               </nav>
             </div>
           </div>
-          <div className="col-sm-3 col-lg-2">
-            <ul className="nav nav-tabs wishListII pt-5 justify-content-end border-bottom-0">
+          <div className="col-sm-3 col-lg-3">
+            <ul className="nav nav-tabs wishListII pt-3 justify-content-end border-bottom-0">
               <li className="nav-item">
-                <Link className="nav-link icon-profile" to="/profile"></Link>
+                <>
+                  <div className="d-flex">
+                    <Dropdown
+                      overlay={
+                        <Menu>
+                          <Menu.Item onClick={handleLogout}>Logout</Menu.Item>
+                        </Menu>
+                      }
+                    >
+                      <div style={{ display: 'flex', flexDirection: 'row' }}>
+                        <Space direction="horizontal" size="middle">
+                          <Typography.Text>
+                            Hi, {user.firstName}
+                          </Typography.Text>
+                          <Avatar size="default">{user.firstName[0]}</Avatar>
+                        </Space>
+                      </div>
+                    </Dropdown>
+                  </div>
+                </>
               </li>
             </ul>
           </div>

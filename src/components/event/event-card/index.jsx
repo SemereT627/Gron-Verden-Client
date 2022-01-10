@@ -22,7 +22,16 @@ const tailLayout = {
   wrapperCol: { offset: 8, span: 16 },
 };
 
-const EventCard = () => {
+const EventCard = ({
+  eventName,
+  eventDescription,
+  eventStartDate,
+  eventEndDate,
+  eventGoal,
+  eventTotalParticipants,
+  eventId,
+  eventLogo,
+}) => {
   const handleSubmit = (values) => {
     console.log(values);
   };
@@ -33,26 +42,20 @@ const EventCard = () => {
         <div className="row">
           <div className="col-12 col-lg-6 pt-xl-12 pt-lg-8">
             <h2 className="playfair fwEbold position-relative mb-7 pb-5">
-              <strong className="d-block">
-                {/* {eventName} */}
-                ABC
-              </strong>
+              <strong className="d-block">{eventName}</strong>
             </h2>
-            <p className="pr-xl-16 pr-lg-10 mb-lg-0 mb-6">
-              {/* {eventDescription} */}
-              BCD
-            </p>
+            <p className="pr-xl-16 pr-lg-10 mb-lg-0 mb-6">{eventDescription}</p>
             <div className="row">
               <div className="col-sm-6">
                 <p className="pt-5">
                   <span className="font-weight-bold">Start Date</span> : 2020
-                  {/* {eventStartDate} */}
+                  {eventStartDate}
                 </p>
               </div>
               <div className="col-sm-6">
                 <p className="pt-5">
                   <span className="font-weight-bold">End Date</span> : 2021
-                  {/* {eventEndDate} */}
+                  {eventEndDate}
                 </p>
               </div>
             </div>
@@ -60,27 +63,26 @@ const EventCard = () => {
               <div className="col-sm-6">
                 <p>
                   <span className="font-weight-bold">Event goal</span> :{' '}
-                  {/* {eventGoal} */}
-                  2000
+                  {eventGoal}
                 </p>
               </div>
               <div className="col-sm-6">
                 <p>
                   <span className="font-weight-bold">Total Participants</span> :{' '}
-                  {/* {eventTotalParticipants} */}
-                  4000
+                  {eventTotalParticipants}
                 </p>
               </div>
             </div>
             <div className="row">
               <div className="col-sm-6">
-                {/* <Progress percent={(eventParticipants.length / 10) * 100} /> */}
+                <Progress
+                  percent={(eventTotalParticipants.length / 10) * 100}
+                />
               </div>
               <div className="col-sm-6">
-                {/* <p><span className="font-weight-bold">Participants </span> : {eventParticipants}</p> */}
                 <Form {...layout} name="control-hooks" onFinish={handleSubmit}>
                   <FormItem name="eventIdentification">
-                    {/* <input value={eventId} hidden /> */}
+                    <input value={eventId} hidden />
                   </FormItem>
                   <Form.Item {...tailLayout}>
                     <Button type="primary" htmlType="submit">
@@ -93,11 +95,12 @@ const EventCard = () => {
           </div>
 
           <div className="col-12 col-lg-6">
-            {/* <img
-              src={`http://localhost:8000/${eventLogo}`}
+            {console.log(process.env.REACT_APP_IMAGE_URL)}
+            <img
+              src={`${process.env.REACT_APP_IMAGE_URL}/event/${eventLogo}`}
               alt="image description"
               className="img-fluid"
-            /> */}
+            />
           </div>
         </div>
       </section>

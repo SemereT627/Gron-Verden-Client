@@ -1,4 +1,6 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
+
+import { useDispatch, useSelector } from 'react-redux';
 
 import {
   Form,
@@ -10,6 +12,7 @@ import {
   message,
   DatePicker,
   InputNumber,
+  notification,
 } from 'antd';
 import {
   UploadOutlined,
@@ -17,6 +20,12 @@ import {
   LoadingOutlined,
   PlusOutlined,
 } from '@ant-design/icons';
+import { useHistory } from 'react-router-dom';
+
+import {
+  clearcreateEventSuccess,
+  createEventAsync,
+} from '../../../store/event/action';
 
 const layout = {
   labelCol: { span: 8 },
@@ -26,7 +35,13 @@ const tailLayout = {
   wrapperCol: { offset: 8, span: 16 },
 };
 
-const CreateEvent = ({ visible, onCancel }) => {
+const CreateEvent = ({ visible, onCancel, onSubmit }) => {
+  const dispatch = useDispatch();
+  const history = useHistory();
+
+  const { events, createEventError, createEventLoading, createEventSuccess } =
+    useSelector((state) => state.event);
+
   const [form, setForm] = useState({
     file: null,
     fileList: [],
@@ -83,36 +98,82 @@ const CreateEvent = ({ visible, onCancel }) => {
   const handleChange = ({ fileList, file }) =>
     setForm({ ...form, file, fileList });
 
-  const handleSubmit = () => {};
+  const handleSubmit = (values) => {
+    const {
+      eventDescription,
+      eventEndDate,
+      eventStartDate,
+      eventName,
+      eventTotalParticipants,
+      eventLogo,
+    } = values;
+
+    const newEvent = new FormData();
+    newEvent.append('eventDescription', eventDescription);
+    newEvent.append('eventEndDate', eventEndDate);
+    newEvent.append('eventStartDate', eventStartDate);
+    newEvent.append('eventName', eventName);
+    newEvent.append('eventTotalParticipants', eventTotalParticipants);
+    newEvent.append('eventLogo', form.file);
+
+    console.log(values);
+    dispatch(createEventAsync(newEvent));
+  };
+
+  const onSubmitForm = () => onSubmit();
+
+  useEffect(() => {
+    if (createEventError) {
+      dispatch(clearcreateEventSuccess());
+    }
+  }, [createEventError]);
+
+  useEffect(() => {
+    if (createEventSuccess) {
+      message.success('Event created successfully');
+      dispatch(clearcreateEventSuccess());
+      onSubmitForm();
+      history.push('/events');
+    }
+  }, [createEventSuccess]);
 
   return (
     <>
+      {/* {createEventError && createEventError.message
+        ? notification.error({
+          
+          placement:'topRight',
+          description: createEventError.data
+        })
+        : null} */}
+
       <Modal
         visible={visible}
         onOk={handleSubmit}
         onCancel={onCancel}
-        footer={
-          ((
-            <Button type="primary" onClick={onCancel}>
-              Cancel
-            </Button>
-          ),
-          (
-            <Button
-              form="driverForm"
-              key="submit"
-              htmlType="submit"
-              // disabled={createDriverLoading}
-              // loading={createDriverLoading}
-            >
-              Submit
-            </Button>
-          ))
-        }
+        footer={[
+          <Button type="primary" danger onClick={onCancel}>
+            Cancel
+          </Button>,
+          <Button
+            form="createEvent"
+            key="submit"
+            htmlType="submit"
+            disabled={createEventLoading}
+            loading={createEventLoading}
+          >
+            Submit
+          </Button>,
+        ]}
       >
         <div className="card mt-2 w-80 m-2 p-2 mx-auto">
           <h2 className="text-center playfair">Create Event</h2>
-          <Form {...layout} name="control-hooks" onFinish={handleSubmit}>
+          <Form
+            id="createEvent"
+            {...layout}
+            name="control-hooks"
+            onFinish={handleSubmit}
+          >
             <Form.Item name="eventLogo" label="Profile Picture">
               <Upload
                 listType="picture-card"
@@ -164,15 +225,6 @@ const CreateEvent = ({ visible, onCancel }) => {
                 placeholder="Total Event Participants"
                 className="w-100"
               />
-            </Form.Item>
-
-            <Form.Item {...tailLayout}>
-              <Button type="primary" htmlType="submit">
-                Submit
-              </Button>
-              {/* <Button htmlType="button" onClick={onReset}>
-              Reset
-            </Button> */}
             </Form.Item>
           </Form>
         </div>

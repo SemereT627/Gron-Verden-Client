@@ -5,13 +5,10 @@ export const fetchEventsStart = () => ({
   type: EventActionTypes.EVENTS_FETCH_START,
 });
 
-export const fetchEventsSuccess = (events, page, limit, total) => ({
+export const fetchEventsSuccess = (events) => ({
   type: EventActionTypes.EVENTS_FETCH_SUCCESS,
   payload: {
     events,
-    page,
-    limit,
-    total,
   },
 });
 
@@ -130,10 +127,10 @@ export const cleardeleteEventSuccess = () => ({
  * Async action types
  */
 
-export const fetchEventsAsync = (page, limit) => {
+export const fetchEventsAsync = () => {
   return async (dispatch, getState) => {
     const {
-      user: { token },
+      auth: { token },
     } = getState();
 
     try {
@@ -141,10 +138,6 @@ export const fetchEventsAsync = (page, limit) => {
       const response = await axios.get(
         `${process.env.REACT_APP_API_URL}/events`,
         {
-          params: {
-            _page: page,
-            _limit: limit,
-          },
           headers: {
             Authorization: `Bearer ${token}`,
           },
@@ -152,14 +145,7 @@ export const fetchEventsAsync = (page, limit) => {
       );
       console.log(response);
 
-      //   dispatch(
-      //     fetchEventsSuccess(
-      //       response.data.data.owners.docs,
-      //       response.data.data.owners.page,
-      //       response.data.data.owners.limit,
-      //       response.data.data.owners.totalDocs
-      //     )
-      //   );
+      dispatch(fetchEventsSuccess(response.data.events));
     } catch (err) {
       dispatch(fetchEventsError(err));
     }
@@ -169,7 +155,7 @@ export const fetchEventsAsync = (page, limit) => {
 export const fetchAllShopsAsync = () => {
   return async (dispatch, getState) => {
     const {
-      user: { token },
+      auth: { token },
     } = getState();
 
     try {
@@ -198,7 +184,7 @@ export const fetchAllShopsAsync = () => {
 export const fetchEventAsync = (id) => {
   return async (dispatch, getState) => {
     const {
-      user: { token },
+      auth: { token },
     } = getState();
 
     try {
@@ -224,7 +210,7 @@ export const fetchEventAsync = (id) => {
 export const createEventAsync = (formData) => {
   return async (dispatch, getState) => {
     const {
-      user: { token },
+      auth: { token },
     } = getState();
 
     try {
@@ -240,9 +226,7 @@ export const createEventAsync = (formData) => {
           },
         }
       );
-      console.log(response);
-
-      //   dispatch(createEventSuccess(response.data.data.owner));
+      dispatch(createEventSuccess(response.data.event));
     } catch (err) {
       dispatch(createEventError(err));
     }
@@ -252,7 +236,7 @@ export const createEventAsync = (formData) => {
 export const updateEventAsync = (id, form) => {
   return async (dispatch, getState) => {
     const {
-      user: { token },
+      auth: { token },
     } = getState();
 
     try {
@@ -278,7 +262,7 @@ export const updateEventAsync = (id, form) => {
 export const deleteEventAsync = (id) => {
   return async (dispatch, getState) => {
     const {
-      user: { token },
+      auth: { token },
     } = getState();
 
     try {

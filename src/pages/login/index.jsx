@@ -40,7 +40,7 @@ const LoginPage = () => {
   useEffect(() => {
     console.log(token);
     if (token) {
-      history.push('/home');
+      history.push('/');
     }
   }, [token]);
 
