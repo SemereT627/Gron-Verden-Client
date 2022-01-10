@@ -1,3 +1,5 @@
+import { PlantActionTypes } from './types';
+
 const INITIAL_STATE = {
   fetchPlantsLoading: false,
   fetchPlantLoading: false,
@@ -27,16 +29,16 @@ const INITIAL_STATE = {
   total: 0,
 };
 
-const OwnerReducer = (state = INITIAL_STATE, action) => {
+const PlantReducer = (state = INITIAL_STATE, action) => {
   switch (action.type) {
-    case OwnerActionTypes.OWNERS_FETCH_START:
+    case PlantActionTypes.PLANTS_FETCH_START:
       return {
         ...state,
         fetchPlantsLoading: true,
         fetchPlantsError: null,
       };
 
-    case OwnerActionTypes.OWNERS_FETCH_SUCCESS:
+    case PlantActionTypes.PLANTS_FETCH_SUCCESS:
       return {
         ...state,
         fetchPlantsLoading: false,
@@ -47,28 +49,28 @@ const OwnerReducer = (state = INITIAL_STATE, action) => {
         fetchPlantsError: null,
       };
 
-    case OwnerActionTypes.OWNERS_FETCH_ERROR:
+    case PlantActionTypes.PLANTS_FETCH_ERROR:
       return {
         ...state,
         fetchPlantsLoading: false,
         fetchPlantsError: action.payload.error,
       };
 
-    case OwnerActionTypes.CLEAR_OWNERS_FETCH_SUCCESS:
+    case PlantActionTypes.CLEAR_PLANTS_FETCH_SUCCESS:
       return {
         ...state,
         fetchPlantsError: false,
         fetchPlantsSuccess: false,
       };
 
-    case OwnerActionTypes.OWNER_FETCH_START:
+    case PlantActionTypes.PLANT_FETCH_START:
       return {
         ...state,
         fetchPlantLoading: true,
         fetchPlantError: null,
       };
 
-    case OwnerActionTypes.OWNER_FETCH_SUCCESS:
+    case PlantActionTypes.PLANT_FETCH_SUCCESS:
       return {
         ...state,
         fetchPlantLoading: false,
@@ -80,14 +82,14 @@ const OwnerReducer = (state = INITIAL_STATE, action) => {
         fetchPlantError: null,
       };
 
-    case OwnerActionTypes.OWNER_FETCH_ERROR:
+    case PlantActionTypes.PLANT_FETCH_ERROR:
       return {
         ...state,
         fetchPlantLoading: false,
         fetchPlantError: action.payload.error,
       };
 
-    case OwnerActionTypes.CLEAR_OWNER_FETCH_SUCCESS:
+    case PlantActionTypes.CLEAR_PLANT_FETCH_SUCCESS:
       return {
         ...state,
         fetchPlantLoading: false,
@@ -95,14 +97,14 @@ const OwnerReducer = (state = INITIAL_STATE, action) => {
         fetchPlantsError: false,
       };
 
-    case OwnerActionTypes.OWNER_CREATE_START:
+    case PlantActionTypes.PLANT_CREATE_START:
       return {
         ...state,
         createPlantLoading: true,
         createPlantError: null,
       };
 
-    case OwnerActionTypes.OWNER_CREATE_SUCCESS:
+    case PlantActionTypes.PLANT_CREATE_SUCCESS:
       return {
         ...state,
         createPlantLoading: false,
@@ -111,28 +113,28 @@ const OwnerReducer = (state = INITIAL_STATE, action) => {
         createPlantError: null,
       };
 
-    case OwnerActionTypes.OWNER_CREATE_ERROR:
+    case PlantActionTypes.PLANT_CREATE_ERROR:
       return {
         ...state,
         createPlantLoading: false,
         createPlantError: action.payload.error,
       };
 
-    case OwnerActionTypes.CLEAR_OWNER_CREATE_SUCCESS:
+    case PlantActionTypes.CLEAR_PLANT_CREATE_SUCCESS:
       return {
         ...state,
         createPlantSuccess: false,
         createPlantError: false,
       };
 
-    case OwnerActionTypes.OWNER_UPDATE_START:
+    case PlantActionTypes.PLANT_UPDATE_START:
       return {
         ...state,
         updatePlantLoading: true,
         updatePlantError: null,
       };
 
-    case OwnerActionTypes.OWNER_UPDATE_SUCCESS:
+    case PlantActionTypes.PLANT_UPDATE_SUCCESS:
       return {
         ...state,
         updatePlantLoading: false,
@@ -144,28 +146,28 @@ const OwnerReducer = (state = INITIAL_STATE, action) => {
         updatePlantError: null,
       };
 
-    case OwnerActionTypes.OWNER_UPDATE_ERROR:
+    case PlantActionTypes.PLANT_UPDATE_ERROR:
       return {
         ...state,
         updatePlantLoading: false,
         updatePlantError: action.payload.error,
       };
 
-    case OwnerActionTypes.CLEAR_OWNER_UPDATE_SUCCESS:
+    case PlantActionTypes.CLEAR_PLANT_UPDATE_SUCCESS:
       return {
         ...state,
         updatePlantError: false,
         updatePlantLoading: false,
       };
 
-    case OwnerActionTypes.OWNER_DELETE_START:
+    case PlantActionTypes.PLANT_DELETE_START:
       return {
         ...state,
         deletePlantLoading: true,
         deletePlantError: null,
       };
 
-    case OwnerActionTypes.OWNER_DELETE_SUCCESS:
+    case PlantActionTypes.PLANT_DELETE_SUCCESS:
       return {
         ...state,
         deletePlantLoading: false,
@@ -173,7 +175,7 @@ const OwnerReducer = (state = INITIAL_STATE, action) => {
         deletePlantError: null,
       };
 
-    case OwnerActionTypes.OWNER_DELETE_ERROR:
+    case PlantActionTypes.PLANT_DELETE_ERROR:
       return {
         ...state,
         deletePlantLoading: false,
@@ -181,12 +183,12 @@ const OwnerReducer = (state = INITIAL_STATE, action) => {
         deletePlantError: action.payload.error,
       };
 
-    case OwnerActionTypes.CLEAR_OWNER_DELETE_SUCCESS:
+    case PlantActionTypes.CLEAR_PLANT_DELETE_SUCCESS:
       return {
         ...state,
         deletePlantError: false,
+        deletePlantSuccess: false,
         deletePlantLoading: false,
-        deletePlantError: false,
       };
 
     default:
@@ -194,4 +196,4 @@ const OwnerReducer = (state = INITIAL_STATE, action) => {
   }
 };
 
-export default OwnerReducer;
+export default PlantReducer;

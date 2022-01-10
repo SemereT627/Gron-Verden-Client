@@ -29,7 +29,7 @@ const Header = () => {
               <a
                 className="dropdown-toggle text-uppercase"
                 data-toggle="dropdown"
-                href="javascript:void(0);"
+                href="#;"
                 role="button"
                 aria-haspopup="true"
                 aria-expanded="false"
@@ -37,10 +37,10 @@ const Header = () => {
                 ENG
               </a>
               <div className="dropdown-menu pl-4 pr-4">
-                <a className="dropdown-item" href="javascript:void(0);">
+                <a className="dropdown-item" href="#;">
                   English
                 </a>
-                <a className="dropdown-item" href="javascript:void(0);">
+                <a className="dropdown-item" href="#;">
                   Amharic
                 </a>
               </div>
@@ -64,8 +64,8 @@ const Header = () => {
                 </button>
                 <div className="collapse navbar-collapse" id="navbarNav">
                   <ul className="navbar-nav mx-auto text-uppercase d-inline-block">
-                    <li class="nav-item">
-                      <Link class="d-block" to="/">
+                    <li className="nav-item">
+                      <Link className="d-block" to="/">
                         Home
                       </Link>
                     </li>

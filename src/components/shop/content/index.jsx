@@ -3,67 +3,67 @@ import React from 'react';
 const ShopContent = () => {
   return (
     <>
-      <div class="col-12 col-lg-9 order-lg-3">
+      <div className="col-12 col-lg-9 order-lg-3">
         <article id="content">
-          <header class="show-head d-flex flex-wrap justify-content-between mb-7">
-            <div class="sortGroup">
-              <div class="d-flex flex-nowrap align-items-center">
-                <h1 class="mr-2">List of Plants</h1>
+          <header className="show-head d-flex flex-wrap justify-content-between mb-7">
+            <div className="sortGroup">
+              <div className="d-flex flex-nowrap align-items-center">
+                <h1 className="mr-2">List of Plants</h1>
               </div>
             </div>
           </header>
-          <div class="row">
+          <div className="row">
             {/* {shopPlants &&
               shopPlants.map((plant) => {
                 return (
-                  <div class="col-12 col-sm-6 col-lg-4 featureCol mb-7">
-                    <div class="border">
-                      <div class="imgHolder position-relative w-100 overflow-hidden">
+                  <div className="col-12 col-sm-6 col-lg-4 featureCol mb-7">
+                    <div className="border">
+                      <div className="imgHolder position-relative w-100 overflow-hidden">
                         <img
                           src={`http://localhost:8000/${plant.plantImage}`}
                           alt="image description"
-                          class="img-fluid w-100"
+                          className="img-fluid w-100"
                         />
-                        <ul class="list-unstyled postHoverLinskList d-flex justify-content-center m-0">
-                          <li class="mr-2 overflow-hidden">
+                        <ul className="list-unstyled postHoverLinskList d-flex justify-content-center m-0">
+                          <li className="mr-2 overflow-hidden">
                             <a
-                              href="javascript:void(0);"
-                              class="icon-heart d-block"
+                              href="#;"
+                              className="icon-heart d-block"
                             ></a>
                           </li>
-                          <li class="mr-2 overflow-hidden">
+                          <li className="mr-2 overflow-hidden">
                             <a
-                              href="javascript:void(0);"
-                              class="icon-cart d-block"
+                              href="#;"
+                              className="icon-cart d-block"
                             ></a>
                           </li>
-                          <li class="mr-2 overflow-hidden">
+                          <li className="mr-2 overflow-hidden">
                             <Link
                               to={`/product/${plant._id}`}
-                              class="icon-eye d-block"
+                              className="icon-eye d-block"
                             ></Link>
                           </li>
-                          <li class="overflow-hidden">
+                          <li className="overflow-hidden">
                             <a
-                              href="javascript:void(0);"
-                              class="icon-arrow d-block"
+                              href="#;"
+                              className="icon-arrow d-block"
                             ></a>
                           </li>
                         </ul>
                       </div>
-                      <div class="text-center py-5 px-4">
-                        <span class="title fwEbold d-block mb-1">
+                      <div className="text-center py-5 px-4">
+                        <span className="title fwEbold d-block mb-1">
                           <Link to={`/product/${plant._id}`}>
                             {plant.plantName}
                           </Link>
                         </span>
-                        <span class="price d-block fwEbold">
+                        <span className="price d-block fwEbold">
                           Plant price: {plant.plantPrice}br
                         </span>
-                        <span class="hotOffer fwEbold text-white position-absolute d-block">
+                        <span className="hotOffer fwEbold text-white position-absolute d-block">
                           {plant.plantLength}cm
                         </span>
-                        <span class="hotOffer green fwEbold text-uppercase text-white position-absolute d-block ml-8">
+                        <span className="hotOffer green fwEbold text-uppercase text-white position-absolute d-block ml-8">
                           Size
                         </span>
                       </div>
@@ -71,23 +71,23 @@ const ShopContent = () => {
                   </div>
                 );
               })} */}
-            <div class="col-12 pt-3 mb-lg-0 mb-md-6 mb-3">
-              <ul class="list-unstyled pagination d-flex justify-content-center align-items-end">
+            <div className="col-12 pt-3 mb-lg-0 mb-md-6 mb-3">
+              <ul className="list-unstyled pagination d-flex justify-content-center align-items-end">
                 <li>
-                  <a href="javascript:void(0);">
-                    <i class="fas fa-chevron-left"></i>
+                  <a href="#;">
+                    <i className="fas fa-chevron-left"></i>
                   </a>
                 </li>
-                <li class="active">
-                  <a href="javascript:void(0);">1</a>
+                <li className="active">
+                  <a href="#;">1</a>
                 </li>
                 <li>
-                  <a href="javascript:void(0);">2</a>
+                  <a href="#;">2</a>
                 </li>
                 <li>...</li>
                 <li>
-                  <a href="javascript:void(0);">
-                    <i class="fas fa-chevron-right"></i>
+                  <a href="#;">
+                    <i className="fas fa-chevron-right"></i>
                   </a>
                 </li>
               </ul>

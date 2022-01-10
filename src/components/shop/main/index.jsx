@@ -5,8 +5,8 @@ import ShopFilter from '../shop-filter';
 const ShopMain = () => {
   return (
     <>
-      <div class="twoColumns container pt-10">
-        <div class="row">
+      <div className="twoColumns container pt-10">
+        <div className="row">
           <ShopFilter />
           <ShopContent />
         </div>

@@ -37,7 +37,7 @@ const Footer = () => {
                   ></span>{' '}
                   <span className="leftAlign" style={{ color: '#aaaaaa' }}>
                     Phone :{' '}
-                    <a href="javascript:void(0);" style={{ color: '#aaaaaa' }}>
+                    <a href="#;" style={{ color: '#aaaaaa' }}>
                       (+251) 953 894183 <br />
                       &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(+251)
                       966 303009
@@ -51,7 +51,7 @@ const Footer = () => {
                   ></span>{' '}
                   <span className="leftAlign" style={{ color: '#aaaaaa' }}>
                     Email:{' '}
-                    <a href="javascript:void(0);" style={{ color: '#aaaaaa' }}>
+                    <a href="#;" style={{ color: '#aaaaaa' }}>
                       michael@eshidigital.com <br />
                       &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                       semere@eshidigital.com
@@ -79,10 +79,7 @@ const Footer = () => {
                   <Link to="" className="fab fa-pinterest"></Link>
                 </li>
                 <li className="mr-2">
-                  <Link
-                    to="javascript:void(0);"
-                    className="fab fa-google-plus-g"
-                  ></Link>
+                  <Link to="#;" className="fab fa-google-plus-g"></Link>
                 </li>
               </ul>
             </div>
@@ -142,42 +139,27 @@ const Footer = () => {
               <div>
                 <ul className="list-unstyled tagNavList d-flex flex-column justify-content-lg-end mb-0">
                   <li className="text-center mb-2 px-8">
-                    <a
-                      href="javascript:void(0);"
-                      className="md-round d-block py-2 px-2"
-                    >
+                    <a href="#;" className="md-round d-block py-2 px-2">
                       Indoor plant
                     </a>
                   </li>
                   <li className="text-center mb-2 px-8">
-                    <a
-                      href="javascript:void(0);"
-                      className="md-round d-block py-2 px-2"
-                    >
+                    <a href="#;" className="md-round d-block py-2 px-2">
                       Office plant
                     </a>
                   </li>
                   <li className="text-center mb-2 px-8">
-                    <a
-                      href="javascript:void(0);"
-                      className="md-round d-block py-2 px-2"
-                    >
+                    <a href="#;" className="md-round d-block py-2 px-2">
                       Cactus plant
                     </a>
                   </li>
                   <li className="text-center mb-2 px-8">
-                    <a
-                      href="javascript:void(0);"
-                      className="md-round d-block py-2 px-2"
-                    >
+                    <a href="#;" className="md-round d-block py-2 px-2">
                       Table tree plant
                     </a>
                   </li>
                   <li className="text-center mb-2 px-8">
-                    <a
-                      href="javascript:void(0);"
-                      className="md-round d-block py-2 px-2"
-                    >
+                    <a href="#;" className="md-round d-block py-2 px-2">
                       House plant
                     </a>
                   </li>
@@ -193,7 +175,7 @@ const Footer = () => {
         >
           <div className="copyRightHolder text-center pt-lg-5 pb-lg-4 py-3">
             <p className="mb-0">
-              Copyright 2021 by <Link to="/">Grøn Verden</Link> - All right
+              Copyright 2021 by <Link to="/">Grøn Verden</Link> - All rights
               reserved
             </p>
           </div>

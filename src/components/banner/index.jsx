@@ -18,7 +18,7 @@ const HomeBanner = () => {
                   How can knowing and learning about plants be a tool to solve
                   Earth’s environmental challenges?{' '}
                 </p>
-                <Link className="btn-custom" to="/learn">
+                <Link className="btn-custom" to="#">
                   <span className="btn-text">Learn More</span>
                   <span className="icon-arrow-right">
                     <i className="lnr lnr-arrow-right"></i>

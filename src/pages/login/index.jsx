@@ -141,11 +141,11 @@ const LoginPage = () => {
                   Don't have account? <Link to="/register">Sign Up</Link>
                 </Typography.Text>
                 <Typography.Text>
-                  <Link onClick={() => showModal()}>Forgot Password?</Link>
+                  <a onClick={() => showModal()}>Forgot Password?</a>
                 </Typography.Text>
               </div>
               <Typography.Text>
-                <Link>Google</Link>
+                <a>Google</a>
               </Typography.Text>
             </Form.Item>
           </Form>
