@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 
 import {
   Form,
@@ -40,8 +40,33 @@ const EventCard = ({
   eventId,
   eventLogo,
   onSubmitClicked,
-  applyEventLoading,
 }) => {
+  const dispatch = useDispatch();
+  const { applyEventLoading, applyEventSuccess, applyEventError } = useSelector(
+    (state) => state.applyEvent
+  );
+
+  const handleSubmit = (values) => {
+    setApplyEventLoadin(true);
+    handleOnSubmit(values);
+  };
+  const handleOnSubmit = (values) => {};
+
+  const [applyEventLoadin, setApplyEventLoadin] = useState(false);
+
+  useEffect(() => {
+    if (applyEventSuccess) {
+      message.success('You have successfully registered for an event');
+      dispatch(clearapplyEventSuccess());
+    }
+  }, [applyEventSuccess]);
+
+  useEffect(() => {
+    if (applyEventError) {
+      dispatch(clearapplyEventSuccess());
+    }
+  }, [applyEventError]);
+
   return (
     <>
       <section className="abtSecHolder container pt-xl-24 pb-xl-12 pt-lg-20 pb-lg-10 pt-md-16 pb-md-8 pt-10 pb-5">
@@ -54,7 +79,7 @@ const EventCard = ({
             <div className="row">
               <div className="col-sm-6">
                 <p className="pt-5">
-                  <span className="font-weight-bold">Start Date</span> : 
+                  <span className="font-weight-bold">Start Date</span> :
                   {eventStartDate}
                 </p>
               </div>
@@ -92,15 +117,23 @@ const EventCard = ({
                 />
               </div>
               <div className="col-sm-6">
-                <Form {...layout} name="control-hooks">
+                <Form
+                  onFinish={handleSubmit}
+                  {...layout}
+                  name="control-hooks"
+                  initialValues={{
+                    eventId,
+                  }}
+                >
+                  <Form.Item name={'eventId'}>
+                    <Input value={eventId} hidden />
+                  </Form.Item>
                   <Form.Item {...tailLayout}>
                     <Button
-                    
                       type="primary"
                       htmlType="submit"
-                      onClick={() => onSubmitClicked(eventId)}
-                      loading={applyEventLoading}
-                      disabled={applyEventLoading}
+                      loading={applyEventLoadin}
+                      disabled={applyEventLoadin}
                     >
                       Submit
                     </Button>

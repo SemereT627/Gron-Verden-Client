@@ -100,23 +100,24 @@ const CreateEvent = ({ visible, onCancel, onSubmit }) => {
 
   const handleSubmit = (values) => {
     const {
-      eventDescription,
-      eventEndDate,
-      eventStartDate,
-      eventName,
-      eventTotalParticipants,
       eventLogo,
+      eventName,
+      eventGoal,
+      eventStartDate,
+      eventEndDate,
+      eventDescription,
+      eventTotalParticipants,
     } = values;
 
     const newEvent = new FormData();
-    newEvent.append('eventDescription', eventDescription);
-    newEvent.append('eventEndDate', eventEndDate);
-    newEvent.append('eventStartDate', eventStartDate);
-    newEvent.append('eventName', eventName);
-    newEvent.append('eventTotalParticipants', eventTotalParticipants);
     newEvent.append('eventLogo', form.file);
+    newEvent.append('eventName', eventName);
+    newEvent.append('eventGoal', eventGoal);
+    newEvent.append('eventStartDate', eventStartDate);
+    newEvent.append('eventEndDate', eventEndDate);
+    newEvent.append('eventDescription', eventDescription);
+    newEvent.append('eventTotalParticipants', eventTotalParticipants);
 
-    
     dispatch(createEventAsync(newEvent));
   };
 
@@ -148,6 +149,8 @@ const CreateEvent = ({ visible, onCancel, onSubmit }) => {
         : null} */}
 
       <Modal
+        title="Create Event"
+        width={'50%'}
         visible={visible}
         onOk={handleSubmit}
         onCancel={onCancel}
@@ -166,68 +169,68 @@ const CreateEvent = ({ visible, onCancel, onSubmit }) => {
           </Button>,
         ]}
       >
-        <div className="card mt-2 w-80 m-2 p-2 mx-auto">
-          <h2 className="text-center playfair">Create Event</h2>
-          <Form
-            id="createEvent"
-            {...layout}
-            name="control-hooks"
-            onFinish={handleSubmit}
+        <Form
+          title={'Create Event'}
+          id="createEvent"
+          {...layout}
+          name="control-hooks"
+          onFinish={handleSubmit}
+        >
+          <Form.Item name="eventLogo" label="Profile Picture">
+            <Upload
+              listType="picture-card"
+              fileList={form.fileList}
+              onPreview={handlePreview}
+              onChange={handleChange}
+              beforeUpload={beforeUpload}
+            >
+              {form.fileList.length === 1 ? null : uploadButton}
+            </Upload>
+          </Form.Item>
+          <Form.Item
+            name="eventName"
+            label="Event Name"
+            rules={[{ required: true }]}
           >
-            <Form.Item name="eventLogo" label="Profile Picture">
-              <Upload
-                listType="picture-card"
-                fileList={form.fileList}
-                onPreview={handlePreview}
-                onChange={handleChange}
-                beforeUpload={beforeUpload}
-              >
-                {form.fileList.length === 1 ? null : uploadButton}
-              </Upload>
-            </Form.Item>
-            <Form.Item
-              name="eventName"
-              label="Event Name"
-              rules={[{ required: true }]}
-            >
-              <Input placeholder="Event name" />
-            </Form.Item>
-            <Form.Item
-              name="eventGoal"
-              label="Event Goal"
-              rules={[{ required: true }]}
-            >
-              <Input placeholder="Event Goal" />
-            </Form.Item>
-            <Form.Item
-              name="eventStartDate"
-              label="StartDate"
-              rules={[{ required: true }]}
-            >
-              <DatePicker className="w-100" placeholder="Start Date" />
-            </Form.Item>
-            <Form.Item
-              name="eventEndDate"
-              label="EndDate"
-              rules={[{ required: true }]}
-            >
-              <DatePicker className="w-100" placeholder="End Date" />
-            </Form.Item>
+            <Input placeholder="Event name" />
+          </Form.Item>
+          <Form.Item
+            name="eventGoal"
+            label="Event Goal"
+            rules={[{ required: true }]}
+          >
+            <Input placeholder="Event Goal" />
+          </Form.Item>
+          <Form.Item
+            name="eventStartDate"
+            label="StartDate"
+            rules={[{ required: true }]}
+          >
+            <DatePicker className="w-100" placeholder="Start Date" />
+          </Form.Item>
+          <Form.Item
+            name="eventEndDate"
+            label="EndDate"
+            rules={[{ required: true }]}
+          >
+            <DatePicker className="w-100" placeholder="End Date" />
+          </Form.Item>
 
-            <Form.Item name="eventDescription" label="Description">
-              <Input.TextArea placeholder="Event description..." />
-            </Form.Item>
+          <Form.Item name="eventDescription" label="Description">
+            <Input.TextArea placeholder="Event description..." />
+          </Form.Item>
 
-            <Form.Item name="eventTotalParticipants" label="Total Participants">
-              <InputNumber
-                min={1}
-                max={500}
-                placeholder="Total Event Participants"
-                className="w-100"
-              />
-            </Form.Item>
-          </Form>
-        </div>
+          <Form.Item name="eventTotalParticipants" label="Total Participants">
+            <Input
+              type={'number'}
+              min={1}
+              max={500}
+              placeholder="Total Event Participants"
+              className="w-100"
+            />
+          </Form.Item>
+        </Form>
+        {/* </div> */}
       </Modal>
       <Modal
         visible={preview.previewVisible}
