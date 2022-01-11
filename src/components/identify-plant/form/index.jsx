@@ -102,10 +102,8 @@ const IdentifyPlantForm = () => {
 
   const handleSubmit = (values) => {
     const { identifyPlant } = values;
-    console.log(identifyPlant);
     const formData = new FormData();
     formData.append('file', form.file);
-    console.log(form.file);
     dispatch(identifyPlantAsync(formData));
   };
 

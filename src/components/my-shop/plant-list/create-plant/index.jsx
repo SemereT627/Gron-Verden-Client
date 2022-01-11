@@ -14,6 +14,7 @@ import {
 } from 'antd';
 import { Upload, message } from 'antd';
 import { PlusOutlined } from '@ant-design/icons';
+import { useDispatch, useSelector } from 'react-redux';
 
 const layout = {
   labelCol: { span: 8 },
@@ -23,6 +24,10 @@ const layout = {
 const { Option } = Select;
 
 const CreatePlantInMyShop = ({ visible, onCancel }) => {
+  const dispatch = useDispatch();
+  const { createPlantLoading, createPlantSuccess, createPlantError } =
+    useSelector((state) => state.plant);
+
   const [form, setForm] = useState({
     file: null,
     fileList: [],

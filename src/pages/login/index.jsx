@@ -33,12 +33,11 @@ const LoginPage = () => {
 
   const handleSubmit = (values) => {
     const { email, password } = values;
-    console.log(email, password);
+
     dispatch(loginAsync(email, password));
   };
 
   useEffect(() => {
-    console.log(token);
     if (token) {
       message.success('Logged in successfully');
       history.push('/');

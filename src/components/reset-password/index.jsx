@@ -38,14 +38,13 @@ const ResetPassword = () => {
   const history = useHistory();
   const dispatch = useDispatch();
   const params = useParams();
-  console.log(params);
 
   const { resetPasswordLoading, resetPasswordSuccess, resetPasswordError } =
     useSelector((state) => state.auth);
 
   const handleSubmit = (values) => {
     const { password } = values;
-    console.log(password);
+
     dispatch(resetPasswordAsync(password, params.user_id, params.token_id));
   };
 

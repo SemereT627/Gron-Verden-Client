@@ -4,10 +4,12 @@ import ShopBanner from '../../components/shop/banner';
 import CreateShop from '../../components/shop/create-shop';
 import Footer from '../../components/footer';
 
-import { Button } from 'antd';
+import { Button, Row, Col } from 'antd';
 import MyShop from '../../components/my-shop/main';
+import { useSelector } from 'react-redux';
 
 const MyShopPage = () => {
+  const { user } = useSelector((state) => state.auth);
   const [isVisible, setIsVisible] = useState(false);
   const showModal = () => {
     setIsVisible(true);
@@ -25,14 +27,33 @@ const MyShopPage = () => {
         userName={'My Shop'}
       />
 
-      <Button type="primary" onClick={showModal}>
-        Create Shop
-      </Button>
+      {user.role === 'User' ? (
+        <div
+          style={{
+            display: 'flex',
+            justifyContent: 'center',
+            alignContent: 'center',
+            marginTop: '15px',
+            marginBottom: '15px',
+          }}
+        >
+          <Row>
+            <Col>
+              <Button type="primary" onClick={showModal}>
+                Create Shop
+              </Button>
+            </Col>
+          </Row>
+        </div>
+      ) : (
+        <MyShop />
+      )}
 
-      {/* Need to be in condition */}
-      <CreateShop visible={isVisible} onCancel={handleCanel} />
-      {/* Need to be in condition */}
-      <MyShop />
+      <CreateShop
+        key={'createShop'}
+        visible={isVisible}
+        onCancel={handleCanel}
+      />
 
       <Footer />
     </>

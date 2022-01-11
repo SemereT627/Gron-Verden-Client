@@ -1,4 +1,4 @@
-import { ShopActionTypes } from "./types";
+import { ShopActionTypes } from './types';
 
 const INITIAL_STATE = {
   fetchShopsLoading: false,
@@ -43,9 +43,6 @@ const ShopReducer = (state = INITIAL_STATE, action) => {
         ...state,
         fetchShopsLoading: false,
         shops: action.payload.shops,
-        page: action.payload.page,
-        limit: action.payload.limit,
-        total: action.payload.total,
         fetchShopsError: null,
       };
 

@@ -116,16 +116,6 @@ const RegisterPage = () => {
       message.error('Profile picture can only be JPG or PNG file');
     } else {
       const formData = new FormData();
-      console.log(
-        fullName.split(' ')[1],
-        email,
-        password,
-        userName,
-        phoneNumber,
-        gender,
-        dateOfBirth,
-        city
-      );
       formData.append('firstName', fullName.split(' ')[0]);
       formData.append('lastName', fullName.split(' ')[1]);
       formData.append('email', email);

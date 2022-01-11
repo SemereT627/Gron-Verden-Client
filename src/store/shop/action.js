@@ -5,13 +5,10 @@ export const fetchShopsStart = () => ({
   type: ShopActionTypes.SHOPS_FETCH_START,
 });
 
-export const fetchShopsSuccess = (shops, page, limit, total) => ({
+export const fetchShopsSuccess = (shops) => ({
   type: ShopActionTypes.SHOPS_FETCH_SUCCESS,
   payload: {
     shops,
-    page,
-    limit,
-    total,
   },
 });
 
@@ -130,10 +127,10 @@ export const cleardeleteShopSuccess = () => ({
  * Async action types
  */
 
-export const fetchShopsAsync = (page, limit) => {
+export const fetchShopsAsync = () => {
   return async (dispatch, getState) => {
     const {
-      user: { token },
+      auth: { token },
     } = getState();
 
     try {
@@ -141,10 +138,6 @@ export const fetchShopsAsync = (page, limit) => {
       const response = await axios.get(
         `${process.env.REACT_APP_API_URL}/shops`,
         {
-          params: {
-            _page: page,
-            _limit: limit,
-          },
           headers: {
             Authorization: `Bearer ${token}`,
           },
@@ -152,14 +145,7 @@ export const fetchShopsAsync = (page, limit) => {
       );
       console.log(response);
 
-      //   dispatch(
-      //     fetchShopsSuccess(
-      //       response.data.data.owners.docs,
-      //       response.data.data.owners.page,
-      //       response.data.data.owners.limit,
-      //       response.data.data.owners.totalDocs
-      //     )
-      //   );
+      dispatch(fetchShopsSuccess(response.data.shops));
     } catch (err) {
       dispatch(fetchShopsError(err));
     }
@@ -169,7 +155,7 @@ export const fetchShopsAsync = (page, limit) => {
 export const fetchAllShopsAsync = () => {
   return async (dispatch, getState) => {
     const {
-      user: { token },
+      auth: { token },
     } = getState();
 
     try {
@@ -198,7 +184,7 @@ export const fetchAllShopsAsync = () => {
 export const fetchShopAsync = (id) => {
   return async (dispatch, getState) => {
     const {
-      user: { token },
+      auth: { token },
     } = getState();
 
     try {
@@ -224,7 +210,7 @@ export const fetchShopAsync = (id) => {
 export const createShopAsync = (formData) => {
   return async (dispatch, getState) => {
     const {
-      user: { token },
+      auth: { token },
     } = getState();
 
     try {
@@ -240,9 +226,8 @@ export const createShopAsync = (formData) => {
           },
         }
       );
-      console.log(response);
-
-      //   dispatch(createShopSuccess(response.data.data.owner));
+      // console.log(response);
+      dispatch(createShopSuccess(response.data.shop));
     } catch (err) {
       dispatch(createShopError(err));
     }
@@ -252,7 +237,7 @@ export const createShopAsync = (formData) => {
 export const updateShopAsync = (id, form) => {
   return async (dispatch, getState) => {
     const {
-      user: { token },
+      auth: { token },
     } = getState();
 
     try {
@@ -278,7 +263,7 @@ export const updateShopAsync = (id, form) => {
 export const deleteShopAsync = (id) => {
   return async (dispatch, getState) => {
     const {
-      user: { token },
+      auth: { token },
     } = getState();
 
     try {

@@ -60,6 +60,7 @@ const EventPage = () => {
           justifyContent: 'center',
           alignContent: 'center',
           marginTop: '15px',
+          marginBottom: '15px',
         }}
       >
         <Row>

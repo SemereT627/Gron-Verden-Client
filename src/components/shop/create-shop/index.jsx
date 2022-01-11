@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 
 import {
   Form,
@@ -17,16 +17,28 @@ import {
   LoadingOutlined,
   PlusOutlined,
 } from '@ant-design/icons';
+import { useHistory } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
+import { useSelector } from 'react-redux';
+
+import {
+  createShopAsync,
+  clearcreateShopSuccess,
+} from '../../../store/shop/action';
+import { logOut } from '../../../store/auth/action';
 
 const layout = {
   labelCol: { span: 8 },
   wrapperCol: { span: 10 },
 };
-const tailLayout = {
-  wrapperCol: { offset: 8, span: 12 },
-};
 
 const CreateShop = ({ visible, onCancel }) => {
+  const history = useHistory();
+  const dispatch = useDispatch();
+  const { createShopLoading, createShopSuccess, createShopError } = useSelector(
+    (state) => state.shop
+  );
+
   const [form, setForm] = useState({
     file: null,
     fileList: [],
@@ -84,12 +96,37 @@ const CreateShop = ({ visible, onCancel }) => {
     setForm({ ...form, file, fileList });
 
   const handleSubmit = (values) => {
+    const { shopName, shopDescription, startingHour, closingHour } = values;
+    const newShop = new FormData();
+    newShop.append('shopName', shopName);
+    newShop.append('shopDescription', shopDescription);
+    newShop.append('shopImage', form.file);
+    newShop.append('startingHour', startingHour);
+    newShop.append('closingHour', closingHour);
+
     console.log(values);
+
+    dispatch(createShopAsync(newShop));
   };
+
+  useEffect(() => {
+    if (createShopSuccess) {
+      message.success('Shop created successfully. Logging out');
+      dispatch(clearcreateShopSuccess());
+      dispatch(logOut());
+    }
+  }, [createShopSuccess]);
+
+  useEffect(() => {
+    if (createShopError) {
+      dispatch(clearcreateShopSuccess());
+    }
+  }, [createShopError]);
 
   return (
     <>
       <Modal
+        title="Create Shop"
         visible={visible}
         onOk={handleSubmit}
         onCancel={onCancel}
@@ -101,8 +138,8 @@ const CreateShop = ({ visible, onCancel }) => {
             form="createShop"
             key="submit"
             htmlType="submit"
-            // disabled={createDriverLoading}
-            // loading={createDriverLoading}
+            disabled={createShopLoading}
+            loading={createShopLoading}
           >
             Submit
           </Button>,
@@ -115,8 +152,7 @@ const CreateShop = ({ visible, onCancel }) => {
           onFinish={handleSubmit}
           className="pt-4"
         >
-          <h1 className="text-center">Create Shop</h1>
-          <Form.Item name="shopLogo" label="Profile Picture">
+          <Form.Item key={'shopLogo'} name="shopLogo" label="Profile Picture">
             <Upload
               listType="picture-card"
               fileList={form.fileList}
@@ -128,13 +164,15 @@ const CreateShop = ({ visible, onCancel }) => {
             </Upload>
           </Form.Item>
           <Form.Item
+            key={'shopName'}
             name="shopName"
             label="Shop Name"
             rules={[{ required: true }]}
           >
-            <Input />
+            <Input placeholder="Shop name" />
           </Form.Item>
           <Form.Item
+            key={'shour'}
             name="startingHour"
             label="Starting Hour"
             rules={[{ required: true }]}
@@ -142,6 +180,7 @@ const CreateShop = ({ visible, onCancel }) => {
             <TimePicker use12Hours />
           </Form.Item>
           <Form.Item
+            key={'chour'}
             name="closingHour"
             label="Closing Hour"
             rules={[{ required: true }]}
@@ -149,7 +188,11 @@ const CreateShop = ({ visible, onCancel }) => {
             <TimePicker use12Hours />
           </Form.Item>
 
-          <Form.Item name="shopDescription" label="Description">
+          <Form.Item
+            key={'shopDescription'}
+            name="shopDescription"
+            label="Description"
+          >
             <Input.TextArea />
           </Form.Item>
         </Form>
