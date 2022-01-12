@@ -18,13 +18,13 @@ const IdentifyPlantCard = ({
   return (
     <>
       <Card
-        style={{ width: 400 }}
+        
         cover={<img alt="predict" src={image} />}
         className="box-shadow"
       >
         <h2 className="playfair float-left mr-5">{scientificName}</h2>
-        <div className="d-flex circleBase type3 px-1 py-2 font-weight-bold text-white">
-          {similarProbability}%
+        <div className="d-flex circleBase type3 px-1 py-2 font-weight-bold">
+          {similarProbability.toFixed(2)}%
         </div>
         <br />
 

@@ -198,7 +198,7 @@ const IdentifyPlantForm = () => {
               plants.map((plant, index) => {
                 return (
                   <>
-                    {plant.probability * 100 > 30 ? (
+                    {plant.probability * 100 > 0 ? (
                       <Col className="mb-2" span={8}>
                         <IdentifyPlantCard
                           key={index}

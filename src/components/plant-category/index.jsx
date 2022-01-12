@@ -1,6 +1,78 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
+import { useDispatch } from 'react-redux';
+import { useSelector } from 'react-redux';
+
+import { Spin } from 'antd';
+
+import {
+  clearfetchPlantsSuccess,
+  fetchPlantsAsync,
+} from '../../store/plant/action';
 
 const PlantCategory = () => {
+  const dispatch = useDispatch();
+  const plantTypeName = [
+    'indoorPlant',
+    'housePlant',
+    'cactusPlant',
+    'tableTreePlant',
+    'officePlant',
+  ];
+  const [plantTypes, setPlantTypes] = useState({
+    indoorPlant: 0,
+    tableTreePlant: 0,
+    officePlant: 0,
+    housePlant: 0,
+    cactusPlant: 0,
+  });
+  const { plants, fetchPlantsLoading, fetchPlantsSuccess, fetchPlantsError } =
+    useSelector((state) => state.plant);
+
+  useEffect(() => {
+    dispatch(fetchPlantsAsync());
+  }, []);
+
+  useEffect(() => {
+    const result = {
+      indoorPlant: 0,
+      tableTreePlant: 0,
+      officePlant: 0,
+      housePlant: 0,
+      cactusPlant: 0,
+    };
+    plants.forEach((plant) => {
+      plantTypeName.forEach((plantName) => {
+        if (plant.plantType === plantName) {
+          result[plantName] += 1;
+        }
+      });
+    });
+    setPlantTypes(result);
+    console.log(plantTypes);
+  }, [fetchPlantsSuccess]);
+
+  useEffect(() => {
+    if (fetchPlantsError) {
+      dispatch(clearfetchPlantsSuccess());
+    }
+  }, [fetchPlantsError]);
+
+  if (fetchPlantsLoading || !plants) {
+    return (
+      <div
+        style={{
+          width: '100%',
+          height: '200px',
+          display: 'flex',
+          justifyContent: 'center',
+          alignItems: 'center',
+        }}
+      >
+        <Spin tip="Loading Plants..." />
+      </div>
+    );
+  }
+
   return (
     <>
       <section className="categories padding-section">
@@ -18,7 +90,7 @@ const PlantCategory = () => {
                       <div className="categories-info">
                         <h4>Table Tree Plant</h4>
                         <p className="categories-info-count">
-                          {/* ({plantTypes.tableTreePlant} Items) */}0
+                          ({plantTypes.tableTreePlant} Items)
                         </p>
                       </div>
                     </div>
@@ -34,7 +106,7 @@ const PlantCategory = () => {
                       <div className="categories-info">
                         <h4>Indoor Plants</h4>
                         <p className="categories-info-count">
-                          {/* ({plantTypes.indoorPlant} Items) */}0
+                          ({plantTypes.indoorPlant} Items)
                         </p>
                       </div>
                     </div>
@@ -52,7 +124,7 @@ const PlantCategory = () => {
                       <div className="categories-info">
                         <h4>Office Plants</h4>
                         <p className="categories-info-count">
-                          {/* ({plantTypes.officePlant} Items) */}0
+                          ({plantTypes.officePlant} Items)
                         </p>
                       </div>
                     </div>
@@ -68,7 +140,7 @@ const PlantCategory = () => {
                       <div className="categories-info">
                         <h4>House Plants</h4>
                         <p className="categories-info-count">
-                          {/* ({plantTypes.housePlant} Items) */}0
+                          ({plantTypes.housePlant} Items)
                         </p>
                       </div>
                     </div>
@@ -86,7 +158,7 @@ const PlantCategory = () => {
                   <div className="categories-info">
                     <h4>Cactus Plant</h4>
                     <p className="categories-info-count">
-                      {/* ({plantTypes.cactusPlant} Items) */}0
+                      ({plantTypes.cactusPlant} Items)
                     </p>
                   </div>
                 </div>

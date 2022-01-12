@@ -5,13 +5,10 @@ export const fetchPlantsStart = () => ({
   type: PlantActionTypes.PLANTS_FETCH_START,
 });
 
-export const fetchPlantsSuccess = (plants, page, limit, total) => ({
+export const fetchPlantsSuccess = (plants) => ({
   type: PlantActionTypes.PLANTS_FETCH_SUCCESS,
   payload: {
     plants,
-    page,
-    limit,
-    total,
   },
 });
 
@@ -130,7 +127,7 @@ export const cleardeletePlantSuccess = () => ({
  * Async action types
  */
 
-export const fetchPlantsAsync = (page, limit) => {
+export const fetchPlantsAsync = () => {
   return async (dispatch, getState) => {
     const {
       auth: { token },
@@ -141,54 +138,12 @@ export const fetchPlantsAsync = (page, limit) => {
       const response = await axios.get(
         `${process.env.REACT_APP_API_URL}/plants`,
         {
-          params: {
-            _page: page,
-            _limit: limit,
-          },
           headers: {
             Authorization: `Bearer ${token}`,
           },
         }
       );
-      console.log(response);
-
-      //   dispatch(
-      //     fetchPlantsSuccess(
-      //       response.data.data.owners.docs,
-      //       response.data.data.owners.page,
-      //       response.data.data.owners.limit,
-      //       response.data.data.owners.totalDocs
-      //     )
-      //   );
-    } catch (err) {
-      dispatch(fetchPlantsError(err));
-    }
-  };
-};
-
-export const fetchAllPlantsAsync = () => {
-  return async (dispatch, getState) => {
-    const {
-      auth: { token },
-    } = getState();
-
-    try {
-      dispatch(fetchPlantsStart());
-      const response = await axios.get(
-        `${process.env.REACT_APP_API_URL}/plants`,
-        {
-          params: {
-            _all: true,
-          },
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        }
-      );
-
-      console.log(response);
-
-      //   dispatch(fetchPlantsSuccess(response.data.data.owners));
+      dispatch(fetchPlantsSuccess(response.data.plants));
     } catch (err) {
       dispatch(fetchPlantsError(err));
     }
@@ -242,7 +197,7 @@ export const createPlantAsync = (formData) => {
       );
       console.log(response);
 
-      //   dispatch(createPlantSuccess(response.data.plant));
+      dispatch(createPlantSuccess(response.data.plant));
     } catch (err) {
       dispatch(createPlantError(err));
     }

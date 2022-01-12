@@ -11,6 +11,7 @@ const MyShop = () => {
     {
       shopName: 'Mock',
       shopDescription: 'Shop',
+      shopImage: '',
     },
   ]);
 
@@ -51,14 +52,33 @@ const MyShop = () => {
       <>
         <div className="container">
           <div className="row">
-            <header className="col-12 mainHeader mb-10 text-center">
-              <h1 className="headingIV playfair fwEblod mt-2">Store Name</h1>
-              <h1 className="headingIV playfair fwEblod mt-2">
-                {shop[0].shopName}
-              </h1>
-              <h5 className="playfair fwEblod">Store Description</h5>
-              <p>{shop[0].shopDescription}</p>
-            </header>
+            <div className="col-6">
+              <header className="col-12 mainHeader text-center">
+                <div className="row">
+                  <div className="col-6">
+                    <h2 className="mt-2">Store Name</h2>
+                  </div>
+                  <div className="col-6">
+                    <h2 className="mt-2">{shop[0].shopName}</h2>
+                  </div>
+                  <div className="col-6">
+                    <h2 className="mt-2">
+                      <h4 className="playfair fwEblod">Store Description</h4>
+                    </h2>
+                  </div>
+                  <div className="col-6">
+                    <h4 className="mt-2">{shop[0].shopDescription}</h4>
+                  </div>
+                </div>
+              </header>
+            </div>
+            <div className="col-6">
+              <img
+                width={'200px'}
+                src={`http://localhost:8000/img/shop/${shop[0].shopImage[0]}`}
+                alt="shopLogo"
+              />
+            </div>
           </div>
           <PlantList />
         </div>

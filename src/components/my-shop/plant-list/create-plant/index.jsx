@@ -95,10 +95,17 @@ const CreatePlantInMyShop = ({ visible, onCancel }) => {
     console.log(values);
   };
 
+  const [formx] = Form.useForm();
+  const reset = () => {
+    formx.resetFields();
+  };
+
   useEffect(() => {
     if (createPlantSuccess) {
       message.success('Plant created successfully');
       dispatch(clearcreatePlantSuccess());
+      onCancel();
+      reset();
     }
   }, [createPlantSuccess]);
 
@@ -123,8 +130,8 @@ const CreatePlantInMyShop = ({ visible, onCancel }) => {
             form="createPlant"
             key="submit"
             htmlType="submit"
-            // disabled={createDriverLoading}
-            // loading={createDriverLoading}
+            disabled={createPlantLoading}
+            loading={createPlantLoading}
           >
             Submit
           </Button>,
@@ -135,6 +142,7 @@ const CreatePlantInMyShop = ({ visible, onCancel }) => {
           {...layout}
           name="control-hooks"
           onFinish={handleSubmit}
+          form={formx}
         >
           <Form.Item name="plantImage" label="Profile Picture">
             <Upload

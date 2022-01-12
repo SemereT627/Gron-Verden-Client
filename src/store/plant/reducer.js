@@ -35,6 +35,7 @@ const PlantReducer = (state = INITIAL_STATE, action) => {
       return {
         ...state,
         fetchPlantsLoading: true,
+        fetchPlantsSuccess: false,
         fetchPlantsError: null,
       };
 
@@ -42,10 +43,8 @@ const PlantReducer = (state = INITIAL_STATE, action) => {
       return {
         ...state,
         fetchPlantsLoading: false,
+        fetchPlantsSuccess: true,
         plants: action.payload.plants,
-        page: action.payload.page,
-        limit: action.payload.limit,
-        total: action.payload.total,
         fetchPlantsError: null,
       };
 
@@ -53,6 +52,7 @@ const PlantReducer = (state = INITIAL_STATE, action) => {
       return {
         ...state,
         fetchPlantsLoading: false,
+        fetchPlantsSuccess: false,
         fetchPlantsError: action.payload.error,
       };
 
