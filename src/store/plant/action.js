@@ -133,7 +133,7 @@ export const cleardeletePlantSuccess = () => ({
 export const fetchPlantsAsync = (page, limit) => {
   return async (dispatch, getState) => {
     const {
-      user: { token },
+      auth: { token },
     } = getState();
 
     try {
@@ -152,14 +152,14 @@ export const fetchPlantsAsync = (page, limit) => {
       );
       console.log(response);
 
-    //   dispatch(
-    //     fetchPlantsSuccess(
-    //       response.data.data.owners.docs,
-    //       response.data.data.owners.page,
-    //       response.data.data.owners.limit,
-    //       response.data.data.owners.totalDocs
-    //     )
-    //   );
+      //   dispatch(
+      //     fetchPlantsSuccess(
+      //       response.data.data.owners.docs,
+      //       response.data.data.owners.page,
+      //       response.data.data.owners.limit,
+      //       response.data.data.owners.totalDocs
+      //     )
+      //   );
     } catch (err) {
       dispatch(fetchPlantsError(err));
     }
@@ -169,7 +169,7 @@ export const fetchPlantsAsync = (page, limit) => {
 export const fetchAllPlantsAsync = () => {
   return async (dispatch, getState) => {
     const {
-      user: { token },
+      auth: { token },
     } = getState();
 
     try {
@@ -188,7 +188,7 @@ export const fetchAllPlantsAsync = () => {
 
       console.log(response);
 
-    //   dispatch(fetchPlantsSuccess(response.data.data.owners));
+      //   dispatch(fetchPlantsSuccess(response.data.data.owners));
     } catch (err) {
       dispatch(fetchPlantsError(err));
     }
@@ -198,7 +198,7 @@ export const fetchAllPlantsAsync = () => {
 export const fetchPlantAsync = (id) => {
   return async (dispatch, getState) => {
     const {
-      user: { token },
+      auth: { token },
     } = getState();
 
     try {
@@ -214,7 +214,7 @@ export const fetchPlantAsync = (id) => {
 
       console.log(response);
 
-    //   dispatch(fetchPlantSuccess(id, response.data.data.owner));
+      //   dispatch(fetchPlantSuccess(id, response.data.data.owner));
     } catch (err) {
       dispatch(fetchPlantError(err));
     }
@@ -224,7 +224,7 @@ export const fetchPlantAsync = (id) => {
 export const createPlantAsync = (formData) => {
   return async (dispatch, getState) => {
     const {
-      user: { token },
+      auth: { token },
     } = getState();
 
     try {
@@ -242,7 +242,7 @@ export const createPlantAsync = (formData) => {
       );
       console.log(response);
 
-    //   dispatch(createPlantSuccess(response.data.data.owner));
+      //   dispatch(createPlantSuccess(response.data.plant));
     } catch (err) {
       dispatch(createPlantError(err));
     }
@@ -252,7 +252,7 @@ export const createPlantAsync = (formData) => {
 export const updatePlantAsync = (id, form) => {
   return async (dispatch, getState) => {
     const {
-      user: { token },
+      auth: { token },
     } = getState();
 
     try {
@@ -268,7 +268,7 @@ export const updatePlantAsync = (id, form) => {
       );
       console.log(response);
 
-    //   dispatch(updatePlantSuccess(id, response.data.owner));
+      //   dispatch(updatePlantSuccess(id, response.data.owner));
     } catch (err) {
       dispatch(updatePlantError(err));
     }
@@ -278,7 +278,7 @@ export const updatePlantAsync = (id, form) => {
 export const deletePlantAsync = (id) => {
   return async (dispatch, getState) => {
     const {
-      user: { token },
+      auth: { token },
     } = getState();
 
     try {

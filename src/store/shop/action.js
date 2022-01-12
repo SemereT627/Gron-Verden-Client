@@ -143,8 +143,6 @@ export const fetchShopsAsync = () => {
           },
         }
       );
-      console.log(response);
-
       dispatch(fetchShopsSuccess(response.data.shops));
     } catch (err) {
       dispatch(fetchShopsError(err));

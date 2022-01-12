@@ -1,20 +1,14 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 
-import {
-  Drawer,
-  Form,
-  Button,
-  Col,
-  Row,
-  Input,
-  Select,
-  DatePicker,
-  InputNumber,
-  Modal,
-} from 'antd';
+import { Form, Button, Input, Select, InputNumber, Modal } from 'antd';
 import { Upload, message } from 'antd';
 import { PlusOutlined } from '@ant-design/icons';
 import { useDispatch, useSelector } from 'react-redux';
+
+import {
+  clearcreatePlantSuccess,
+  createPlantAsync,
+} from '../../../../store/plant/action';
 
 const layout = {
   labelCol: { span: 8 },
@@ -85,8 +79,35 @@ const CreatePlantInMyShop = ({ visible, onCancel }) => {
     setForm({ ...form, file, fileList });
 
   const handleSubmit = (values) => {
+    const { plantName, plantType, plantLength, plantPrice, plantDescription } =
+      values;
+
+    const newPlant = new FormData();
+    newPlant.append('plantName', plantName);
+    newPlant.append('plantType', plantType);
+    newPlant.append('plantDescription', plantDescription);
+    newPlant.append('plantLength', plantLength);
+    newPlant.append('plantPrice', plantPrice);
+    newPlant.append('plantImage', form.file);
+
+    dispatch(createPlantAsync(newPlant));
+
     console.log(values);
   };
+
+  useEffect(() => {
+    if (createPlantSuccess) {
+      message.success('Plant created successfully');
+      dispatch(clearcreatePlantSuccess());
+    }
+  }, [createPlantSuccess]);
+
+  useEffect(() => {
+    if (createPlantError) {
+      dispatch(clearcreatePlantSuccess());
+    }
+  }, [createPlantError]);
+
   return (
     <>
       <Modal
@@ -129,11 +150,15 @@ const CreatePlantInMyShop = ({ visible, onCancel }) => {
           <Form.Item
             name="plantName"
             label="Plant Name"
-            rules={[{ required: true }]}
+            rules={[{ required: true, message: 'Plant Name is required' }]}
           >
             <Input placeholder="Plant name" />
           </Form.Item>
-          <Form.Item name="plantType" label="Type" rules={[{ required: true }]}>
+          <Form.Item
+            name="plantType"
+            label="Type"
+            rules={[{ required: true, message: 'Plant Type is required' }]}
+          >
             <Select placeholder="Plant Type" allowClear>
               <Option value="tableTreePlant">Table Tree Plant</Option>
               <Option value="indoorPlant">Indoor Plant</Option>
@@ -148,12 +173,11 @@ const CreatePlantInMyShop = ({ visible, onCancel }) => {
           <Form.Item
             name="plantLength"
             label="Plant Length"
-            rules={[{ required: true }]}
+            rules={[{ required: true, message: 'Plant Length is required' }]}
           >
             <InputNumber
               min={1}
               max={300}
-              defaultValue={25}
               className="w-100"
               placeholder="Plant length in cm"
             />
@@ -161,12 +185,11 @@ const CreatePlantInMyShop = ({ visible, onCancel }) => {
           <Form.Item
             name="plantPrice"
             label="Plant Price"
-            rules={[{ required: true }]}
+            rules={[{ required: true, message: 'Plant Price is required' }]}
           >
             <InputNumber
               min={20}
               max={50000}
-              defaultValue={200}
               placeholder="Plant price"
               className="w-100"
             />

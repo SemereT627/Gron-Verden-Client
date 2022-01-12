@@ -42,6 +42,7 @@ const ShopReducer = (state = INITIAL_STATE, action) => {
       return {
         ...state,
         fetchShopsLoading: false,
+        fetchShopsSuccess: true,
         shops: action.payload.shops,
         fetchShopsError: null,
       };
