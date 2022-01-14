@@ -150,35 +150,6 @@ export const fetchShopsAsync = () => {
   };
 };
 
-export const fetchAllShopsAsync = () => {
-  return async (dispatch, getState) => {
-    const {
-      auth: { token },
-    } = getState();
-
-    try {
-      dispatch(fetchShopsStart());
-      const response = await axios.get(
-        `${process.env.REACT_APP_API_URL}/shops`,
-        {
-          params: {
-            _all: true,
-          },
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        }
-      );
-
-      console.log(response);
-
-      //   dispatch(fetchShopsSuccess(response.data.data.owners));
-    } catch (err) {
-      dispatch(fetchShopsError(err));
-    }
-  };
-};
-
 export const fetchShopAsync = (id) => {
   return async (dispatch, getState) => {
     const {
@@ -224,7 +195,7 @@ export const createShopAsync = (formData) => {
           },
         }
       );
-      // console.log(response);
+
       dispatch(createShopSuccess(response.data.shop));
     } catch (err) {
       dispatch(createShopError(err));

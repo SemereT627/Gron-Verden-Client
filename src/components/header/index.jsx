@@ -108,13 +108,9 @@ const Header = () => {
                 </div>
               </nav>
               <div className="logo">
-                <a href="home.html">
-                  <img
-                    src="images/logo.png"
-                    alt="Botanical"
-                    className="img-fluid"
-                  />
-                </a>
+                <Link to={'/'}>
+                  <img src={logo} alt="Grøn Verden" className="img-fluid" />
+                </Link>
               </div>
             </div>
           </div>

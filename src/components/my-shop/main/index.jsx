@@ -1,6 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { fetchShopsAsync } from '../../../store/shop/action';
+import {
+  clearfetchShopsSuccess,
+  fetchShopsAsync,
+} from '../../../store/shop/action';
 import PlantList from '../plant-list';
 
 import { Spin } from 'antd';
@@ -30,6 +33,7 @@ const MyShop = () => {
         return shop.shopOwner === user._id;
       });
       setShop(shopSingle);
+      dispatch(clearfetchShopsSuccess());
     }
   }, [fetchShopsSuccess]);
 

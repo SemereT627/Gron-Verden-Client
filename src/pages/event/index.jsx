@@ -45,6 +45,12 @@ const EventPage = () => {
   }, []);
 
   useEffect(() => {
+    if (fetchEventsSuccess) {
+      dispatch(clearfetchEventsSuccess());
+    }
+  }, [fetchEventsSuccess]);
+
+  useEffect(() => {
     if (fetchEventsError) {
       dispatch(clearfetchEventsSuccess());
     }

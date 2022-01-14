@@ -59,8 +59,9 @@ const PlantReducer = (state = INITIAL_STATE, action) => {
     case PlantActionTypes.CLEAR_PLANTS_FETCH_SUCCESS:
       return {
         ...state,
-        fetchPlantsError: false,
+        fetchPlantsLoading: false,
         fetchPlantsSuccess: false,
+        fetchPlantsError: false,
       };
 
     case PlantActionTypes.PLANT_FETCH_START:

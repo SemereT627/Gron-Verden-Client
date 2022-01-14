@@ -1,7 +1,51 @@
-import React from 'react';
+import React, { useEffect } from 'react';
+import { useDispatch } from 'react-redux';
+import { useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 
+import { Spin } from 'antd';
+
+import {
+  clearfetchShopsSuccess,
+  fetchShopsAsync,
+} from '../../store/shop/action';
+
 const ShopCategory = () => {
+  const dispatch = useDispatch();
+  const { shops, fetchShopsLoading, fetchShopsSuccess, fetchShopsError } =
+    useSelector((state) => state.shop);
+
+  useEffect(() => {
+    dispatch(fetchShopsAsync());
+  }, []);
+
+  useEffect(() => {
+    if (fetchShopsSuccess) {
+      dispatch(clearfetchShopsSuccess());
+    }
+  }, [fetchShopsSuccess]);
+
+  useEffect(() => {
+    if (fetchShopsError) {
+      dispatch(clearfetchShopsSuccess());
+    }
+  }, [fetchShopsError]);
+
+  if (fetchShopsLoading || !shops) {
+    return (
+      <div
+        style={{
+          width: '100%',
+          height: '200px',
+          display: 'flex',
+          justifyContent: 'center',
+          alignItems: 'center',
+        }}
+      >
+        <Spin tip="Loading Shops..." />
+      </div>
+    );
+  }
   return (
     <>
       <section className="popular-product padding-section">
@@ -15,9 +59,8 @@ const ShopCategory = () => {
             </div>
           </div>
           <div className="row">
-            {/* TODO : What if no shop is yet available ena the other data's */}
-            {/* {shopsProp &&
-              shopsProp.map((shop) => {
+            {shops &&
+              shops.map((shop) => {
                 return (
                   <div
                     key={shop._id}
@@ -27,7 +70,7 @@ const ShopCategory = () => {
                       <div className="box-item-image">
                         <Link to={`/shops/${shop._id}`}>
                           <img
-                            src={`http://localhost:8000/${shop.shopLogo}`}
+                            src={`http://localhost:8000/img/shop/${shop.shopImage}`}
                             alt="Deal of the week"
                           />
                         </Link>
@@ -46,15 +89,15 @@ const ShopCategory = () => {
                       </div>
                       <div className="offer">
                         <div className="percent">
-                          {shop.shopProducts.plants.length > 1
-                            ? `${shop.shopProducts.plants.length} items`
-                            : `${shop.shopProducts.plants.length} item`}
+                          {shop.shopProducts.length > 1
+                            ? `${shop.shopProducts.length} items`
+                            : `${shop.shopProducts.length} item`}
                         </div>
                       </div>
                     </div>
                   </div>
                 );
-              })} */}
+              })}
           </div>
         </div>
       </section>

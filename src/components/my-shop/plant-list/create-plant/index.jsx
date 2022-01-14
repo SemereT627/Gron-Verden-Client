@@ -91,8 +91,6 @@ const CreatePlantInMyShop = ({ visible, onCancel }) => {
     newPlant.append('plantImage', form.file);
 
     dispatch(createPlantAsync(newPlant));
-
-    console.log(values);
   };
 
   const [formx] = Form.useForm();

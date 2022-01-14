@@ -38,9 +38,7 @@ const Footer = () => {
                   <span className="leftAlign" style={{ color: '#aaaaaa' }}>
                     Phone :{' '}
                     <a href="#;" style={{ color: '#aaaaaa' }}>
-                      (+251) 953 894183 <br />
-                      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(+251)
-                      966 303009
+                      (+251) 946 41 42 57 <br />
                     </a>
                   </span>
                 </li>
@@ -52,9 +50,7 @@ const Footer = () => {
                   <span className="leftAlign" style={{ color: '#aaaaaa' }}>
                     Email:{' '}
                     <a href="#;" style={{ color: '#aaaaaa' }}>
-                      michael@eshidigital.com <br />
-                      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                      semere@eshidigital.com
+                      info@eshidigital.com <br />
                     </a>
                   </span>
                 </li>

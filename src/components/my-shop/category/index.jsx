@@ -4,7 +4,10 @@ import {
   clearfetchPlantsSuccess,
   fetchPlantsAsync,
 } from '../../../store/plant/action';
-import { fetchShopsAsync } from '../../../store/shop/action';
+import {
+  clearfetchShopsSuccess,
+  fetchShopsAsync,
+} from '../../../store/shop/action';
 
 import { Spin } from 'antd';
 import { Link } from 'react-router-dom';
@@ -44,13 +47,28 @@ const ShopPlantCategory = () => {
       });
       setUserShopPlants(result);
     }
-  }, [fetchPlantsSuccess]);
-
-  useEffect(() => {
-    if (fetchPlantsError) {
+    if (fetchPlantsSuccess) {
       dispatch(clearfetchPlantsSuccess());
     }
-  }, [fetchPlantsError]);
+  }, [fetchPlantsSuccess]);
+
+  // useEffect(() => {
+  //   if (fetchShopsSuccess) {
+  //     dispatch(clearfetchShopsSuccess());
+  //   }
+  // }, [fetchShopsSuccess]);
+
+  // useEffect(() => {
+  //   if (fetchPlantsError) {
+  //     dispatch(clearfetchPlantsSuccess());
+  //   }
+  // }, [fetchPlantsError]);
+
+  // useEffect(() => {
+  //   if (fetchShopsError) {
+  //     dispatch(clearfetchShopsSuccess());
+  //   }
+  // }, [fetchShopsError]);
 
   if (!fetchPlantsSuccess) {
     return (

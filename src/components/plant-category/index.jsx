@@ -48,7 +48,10 @@ const PlantCategory = () => {
       });
     });
     setPlantTypes(result);
-    console.log(plantTypes);
+
+    if (fetchPlantsSuccess) {
+      dispatch(clearfetchPlantsSuccess());
+    }
   }, [fetchPlantsSuccess]);
 
   useEffect(() => {

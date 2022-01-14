@@ -12,6 +12,7 @@ import {
   Col,
   Space,
   message,
+  Card,
   DatePicker,
   Tag,
 } from 'antd';
@@ -24,6 +25,8 @@ import {
   identifyPlantAsync,
 } from '../../../store/identify-plant/action';
 import IdentifyPlantCard from '../card';
+
+const { Meta } = Card;
 
 const layout = {
   labelCol: { span: 9 },
@@ -168,17 +171,19 @@ const IdentifyPlantForm = () => {
           />
         </Modal>
 
-        <div className="container mt-2">
+        <div>
           {plantclassName !== '' ? (
             <>
-              <h1>Result</h1>
+              <h3>
+                Result
+              </h3>
             </>
           ) : null}
 
           {plantclassName && (
-            <h4>
+            <h1>
               Classname <Tag color="green">{plantclassName}</Tag>
-            </h4>
+            </h1>
           )}
 
           <div
@@ -187,9 +192,9 @@ const IdentifyPlantForm = () => {
             }}
           >
             {plantclassName !== '' ? (
-              <h4>
+              <h3>
                 Photos <Tag color={'#87d068'}>{plants.length}</Tag>
-              </h4>
+              </h3>
             ) : null}
           </div>
           <Row>
@@ -198,18 +203,11 @@ const IdentifyPlantForm = () => {
               plants.map((plant, index) => {
                 return (
                   <>
-                    {plant.probability * 100 > 0 ? (
-                      <Col className="mb-2" span={8}>
-                        <IdentifyPlantCard
-                          key={index}
-                          image={plant.similar_images[1]}
-                          scientificName={plant.plant_name}
-                          url={plant.url}
-                          wikiDescription={plant.url}
-                          similarProbability={plant.probability * 100}
-                        />
+                    {
+                      <Col span={11} style={{margin:'0 5px 0 5px'}}>
+                        <IdentifyPlantCard key={index} plant={plant} />
                       </Col>
-                    ) : null}
+                    }
                   </>
                 );
               })}

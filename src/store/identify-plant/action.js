@@ -31,7 +31,7 @@ export const identifyPlantAsync = (formData) => {
     try {
       dispatch(identifyPlantStart());
       const response = await axios.post(
-        `https://0cd6-197-156-95-133.ngrok.io/predict`,
+        `https://8d12-196-188-125-190.ngrok.io/predict`,
         formData,
         {
           headers: {

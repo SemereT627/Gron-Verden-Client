@@ -35,6 +35,7 @@ const ShopReducer = (state = INITIAL_STATE, action) => {
       return {
         ...state,
         fetchShopsLoading: true,
+        fetchShopsSuccess: false,
         fetchShopsError: null,
       };
 
@@ -51,14 +52,16 @@ const ShopReducer = (state = INITIAL_STATE, action) => {
       return {
         ...state,
         fetchShopsLoading: false,
+        fetchShopsSuccess: false,
         fetchShopsError: action.payload.error,
       };
 
     case ShopActionTypes.CLEAR_SHOPS_FETCH_SUCCESS:
       return {
         ...state,
-        fetchShopsError: false,
+        fetchShopsLoading: false,
         fetchShopsSuccess: false,
+        fetchShopsError: false,
       };
 
     case ShopActionTypes.SHOP_FETCH_START:

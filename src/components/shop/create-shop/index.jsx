@@ -104,8 +104,6 @@ const CreateShop = ({ visible, onCancel }) => {
     newShop.append('startingHour', startingHour);
     newShop.append('closingHour', closingHour);
 
-    console.log(values);
-
     dispatch(createShopAsync(newShop));
   };
 
