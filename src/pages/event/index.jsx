@@ -100,6 +100,7 @@ const EventPage = () => {
       {events.map((event, index) => {
         return (
           <EventCard
+            eventId={event._id}
             eventName={event.eventName}
             eventDescription={event.eventDescription}
             eventStartDate={event.eventStartDate}

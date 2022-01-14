@@ -37,7 +37,7 @@ const MyShop = () => {
     }
   }, [fetchShopsSuccess]);
 
-  if (!fetchShopsSuccess) {
+  if (fetchShopsLoading) {
     return (
       <div
         style={{

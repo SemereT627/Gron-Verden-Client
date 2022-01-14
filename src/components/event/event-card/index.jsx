@@ -10,6 +10,7 @@ import {
   message,
   DatePicker,
   Progress,
+  notification,
 } from 'antd';
 
 import FormItem from 'antd/lib/form/FormItem';
@@ -30,6 +31,7 @@ const tailLayout = {
 };
 
 const EventCard = ({
+  eventId,
   eventName,
   eventDescription,
   eventStartDate,
@@ -37,27 +39,27 @@ const EventCard = ({
   eventGoal,
   eventParticipants,
   eventTotalParticipants,
-  eventId,
   eventLogo,
-  onSubmitClicked,
 }) => {
   const dispatch = useDispatch();
+  const history = useHistory();
   const { applyEventLoading, applyEventSuccess, applyEventError } = useSelector(
     (state) => state.applyEvent
   );
 
-  const handleSubmit = (values) => {
-    setApplyEventLoadin(true);
-    handleOnSubmit(values);
-  };
-  const handleOnSubmit = (values) => {};
-
   const [applyEventLoadin, setApplyEventLoadin] = useState(false);
+
+  const handleSubmit = (values) => {
+    console.log(values);
+    const { eventId } = values;
+    dispatch(applyEventAsync(eventId));
+  };
 
   useEffect(() => {
     if (applyEventSuccess) {
       message.success('You have successfully registered for an event');
       dispatch(clearapplyEventSuccess());
+      history.push('/events');
     }
   }, [applyEventSuccess]);
 
@@ -69,6 +71,13 @@ const EventCard = ({
 
   return (
     <>
+      {applyEventError && applyEventError.response
+        ? notification.error({
+            message: 'Error',
+            placement: 'topRight',
+            description: applyEventError.response.data.msg,
+          })
+        : null}
       <section className="abtSecHolder container pt-xl-24 pb-xl-12 pt-lg-20 pb-lg-10 pt-md-16 pb-md-8 pt-10 pb-5">
         <div className="row">
           <div className="col-12 col-lg-6 pt-xl-12 pt-lg-8">
@@ -111,9 +120,10 @@ const EventCard = ({
             <div className="row">
               <div className="col-sm-6">
                 <Progress
-                  percent={
-                    (eventParticipants.length / eventTotalParticipants) * 10
-                  }
+                  percent={(
+                    (eventParticipants.length / eventTotalParticipants) *
+                    100
+                  ).toFixed(2)}
                 />
               </div>
               <div className="col-sm-6">
@@ -132,8 +142,8 @@ const EventCard = ({
                     <Button
                       type="primary"
                       htmlType="submit"
-                      loading={applyEventLoadin}
-                      disabled={applyEventLoadin}
+                      loading={applyEventLoading}
+                      disabled={applyEventLoading}
                     >
                       Submit
                     </Button>

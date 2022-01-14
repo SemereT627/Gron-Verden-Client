@@ -70,7 +70,7 @@ const ShopPlantCategory = () => {
   //   }
   // }, [fetchShopsError]);
 
-  if (!fetchPlantsSuccess) {
+  if (fetchShopsLoading) {
     return (
       <div
         style={{
